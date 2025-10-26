@@ -7,7 +7,6 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <!-- Fond étoilé -->
   <canvas id="starfield"></canvas>
 
   <header>
@@ -16,49 +15,71 @@
   </header>
 
   <main>
-    <!-- Formats Courts (vertical) -->
+    <!-- Carrousel vertical (Formats Courts) -->
     <section>
       <h2>Formats Courts</h2>
       <div class="carousel carousel-vertical">
         <button class="carousel-btn prev" aria-label="Précédent">‹</button>
         <div class="carousel-track">
           <div class="carousel-item">
-            <a href="#" data-video="https://www.youtube.com/embed/HJQHvL5H0bo" title="Lire la vidéo">
-              <img src="thumb_court1.webp" alt="Vidéo short 1" class="vertical" loading="lazy">
-              <h3>Short Example 1</h3>
-            </a>
+            <div class="carousel-video">
+              <iframe 
+                src="https://www.youtube.com/embed/_S7WEVLbQ-Y"
+                title="Short Example 1"
+                frameborder="0"
+                allow="autoplay; fullscreen; picture-in-picture"
+                allowfullscreen>
+              </iframe>
+            </div>
+            <h3>Short Example 1</h3>
           </div>
           <div class="carousel-item">
-            <a href="#" data-video="https://www.youtube.com/embed/dQw4w9WgXcQ" title="Lire la vidéo">
-              <img src="thumb_court2.webp" alt="Vidéo short 2" class="vertical" loading="lazy">
-              <h3>Short Example 2</h3>
-            </a>
+            <div class="carousel-video">
+              <iframe
+                src="https://www.youtube.com/embed/dQw4w9WgXcQ"
+                title="Short Example 2"
+                frameborder="0"
+                allow="autoplay; fullscreen; picture-in-picture"
+                allowfullscreen>
+              </iframe>
+            </div>
+            <h3>Short Example 2</h3>
           </div>
-          <!-- Duplique pour ajouter d'autres vidéos verticales -->
         </div>
         <button class="carousel-btn next" aria-label="Suivant">›</button>
       </div>
     </section>
 
-    <!-- Formats Best of (horizontal) -->
+    <!-- Carrousel horizontal (Best Of) -->
     <section>
       <h2>Formats Best of</h2>
       <div class="carousel carousel-horizontal">
         <button class="carousel-btn prev" aria-label="Précédent">‹</button>
         <div class="carousel-track">
           <div class="carousel-item">
-            <a href="#" data-video="https://www.youtube.com/embed/SQXtqlGgZNU" title="Lire la vidéo">
-              <img src="thumb_bo1.webp" alt="Vidéo best of 1" class="horizontal" loading="lazy">
-              <h3>Best Of Example 1</h3>
-            </a>
+            <div class="carousel-video">
+              <iframe
+                src="https://www.youtube.com/embed/SQXtqlGgZNU"
+                title="Best Of Example 1"
+                frameborder="0"
+                allow="autoplay; fullscreen; picture-in-picture"
+                allowfullscreen>
+              </iframe>
+            </div>
+            <h3>Best Of Example 1</h3>
           </div>
           <div class="carousel-item">
-            <a href="#" data-video="https://www.youtube.com/embed/fdghsTWGZzM" title="Lire la vidéo">
-              <img src="thumb_bo2.webp" alt="Vidéo best of 2" class="horizontal" loading="lazy">
-              <h3>Best Of Example 2</h3>
-            </a>
+            <div class="carousel-video">
+              <iframe
+                src="https://www.youtube.com/embed/fdghsTWGZzM"
+                title="Best Of Example 2"
+                frameborder="0"
+                allow="autoplay; fullscreen; picture-in-picture"
+                allowfullscreen>
+              </iframe>
+            </div>
+            <h3>Best Of Example 2</h3>
           </div>
-          <!-- Duplique pour ajouter d'autres vidéos horizontales -->
         </div>
         <button class="carousel-btn next" aria-label="Suivant">›</button>
       </div>
@@ -69,64 +90,19 @@
     <a href="mailto:monemail@email.com">Contact</a>
   </footer>
 
-  <!-- Modale vidéo -->
-  <div id="video-modal" class="modal" style="display:none;">
-    <div class="modal-overlay"></div>
-    <div class="modal-content">
-      <button class="modal-close" aria-label="Fermer">✕</button>
-      <div class="modal-video-container"></div>
-    </div>
-  </div>
-
-  <!-- Fond étoilé -->
+  <!-- Fond étoilé + carrousel script standard -->
   <script src="starfield.js"></script>
-
-  <!-- Carrousel & Modale vidéo -->
   <script>
-  // Carousel scroll
-  document.querySelectorAll('.carousel').forEach(carousel => {
-    const track = carousel.querySelector('.carousel-track');
-    carousel.querySelector('.prev').onclick = () => {
-      track.scrollBy({left: -track.offsetWidth * 0.7, behavior:'smooth'});
-    };
-    carousel.querySelector('.next').onclick = () => {
-      track.scrollBy({left: +track.offsetWidth * 0.7, behavior:'smooth'});
-    };
-  });
-
-  // Video modale
-  document.querySelectorAll('.carousel-item a').forEach(a => {
-    a.onclick = function(e) {
-      e.preventDefault();
-      const url = a.dataset.video;
-      if(!url) return;
-      openModal(url);
-    };
-  });
-  function openModal(url) {
-    const modal = document.getElementById('video-modal');
-    const container = modal.querySelector('.modal-video-container');
-    container.innerHTML = `
-      <iframe src="${url}?autoplay=1&rel=0" width="100%" height="400" frameborder="0"
-        allow="autoplay; fullscreen; picture-in-picture"
-        allowfullscreen ></iframe>`;
-    modal.style.display = '';
-    document.body.style.overflow = 'hidden';
-  }
-  // Fermeture modale
-  document.querySelectorAll('.modal-close, .modal-overlay').forEach(el => {
-    el.onclick = closeModal;
-  });
-  function closeModal() {
-    const modal = document.getElementById('video-modal');
-    modal.style.display = 'none';
-    modal.querySelector('.modal-video-container').innerHTML = '';
-    document.body.style.overflow = '';
-  }
-  document.addEventListener('keydown', function(event) {
-    if(event.key === "Escape") closeModal();
-  });
+    // Carousel scroll
+    document.querySelectorAll('.carousel').forEach(carousel => {
+      const track = carousel.querySelector('.carousel-track');
+      carousel.querySelector('.prev').onclick = () => {
+        track.scrollBy({left: -track.offsetWidth * 0.7, behavior:'smooth'});
+      };
+      carousel.querySelector('.next').onclick = () => {
+        track.scrollBy({left: +track.offsetWidth * 0.7, behavior:'smooth'});
+      };
+    });
   </script>
 </body>
 </html>
-
