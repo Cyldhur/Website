@@ -58,7 +58,9 @@ section > .carousel {
 }
 .carousel-btn:hover { background: #1ec8ff; color:#000; }
 .carousel-track {
+  position: relative;
   overflow-x: auto;
+  overflow-y: visible;
   display: flex;
   gap: 1.2rem;
   scroll-behavior: smooth;
