@@ -2,45 +2,33 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
-  <title>Test Hébergement GitHub Pages</title>
+  <title>Portfolio Vidéo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <style>
-    body { 
-      font-family: sans-serif; 
-      background: #f8fafc; 
-      color: #333; 
-      text-align: center; 
-      margin: 0; 
-      padding: 0;
-    }
-    header {
-      background: #2d6cdf;
-      color: #fff;
-      padding: 2rem 0 1rem 0;
-    }
-    main {
-      padding: 2rem;
-    }
-    footer {
-      margin-top: 3rem;
-      font-size: 0.9em;
-      color: #666;
-    }
-  </style>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
+  <!-- Fond animé en canvas -->
+  <canvas id="starfield"></canvas>
+  <!-- Contenu du site -->
   <header>
-    <h1>Bienvenue sur mon site d'essai 🎉</h1>
+    <h1>Prénom Nom</h1>
+    <p>Monteur vidéo | Portfolio</p>
   </header>
   <main>
-    <p>Si tu lis cette page, c'est que l'hébergement fonctionne !</p>
-    <p>
-      Modifie ce fichier <code>index.html</code> pour continuer ton site.<br>
-      Hébergé avec <a href="https://pages.github.com/">GitHub Pages</a>.
-    </p>
+    <section class="video-gallery">
+      <div class="video-card">
+        <a href="https://youtube.com/..." target="_blank">
+          <img src="thumb1.webp" alt="Vidéo 1" loading="lazy">
+          <h3>Titre Vidéo 1</h3>
+          <p>Petite description</p>
+        </a>
+      </div>
+      <!-- ... Plus de vidéos ... -->
+    </section>
   </main>
   <footer>
-    © 2024 - Test GitHub Pages
+    <a href="mailto:email@example.com">Contact</a>
   </footer>
+  <script src="starfield.js"></script>
 </body>
 </html>
