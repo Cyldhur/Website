@@ -32,7 +32,6 @@ h2 {
   letter-spacing: .06em;
 }
 
-/* Carrousels centrés */
 .carousel {
   display: flex;
   align-items: center;
@@ -78,7 +77,6 @@ section > .carousel {
   text-align: center;
   transition: transform .23s cubic-bezier(.4,1.7,.6,.8), box-shadow .22s;
   cursor: pointer;
-  /* Survol */
 }
 .carousel-item h3 {
   color: #1ec8ff;
@@ -111,6 +109,7 @@ section > .carousel {
   justify-content: center;
   border-radius: 7px 7px 0 0;
   overflow: hidden;
+  position: relative;
 }
 .carousel-horizontal .carousel-video { aspect-ratio: 16 / 9; min-height: 115px; }
 .carousel-vertical   .carousel-video { aspect-ratio: 9 / 16; min-height: 320px; }
@@ -122,7 +121,6 @@ section > .carousel {
   background: #111;
   border: none;
 }
-/* Pour carousel horizontal plus large sur desktop */
 .carousel-horizontal .carousel-item { width: 270px; }
 .carousel-horizontal .carousel-video { min-height: 150px; }
 @media (max-width: 800px) {
@@ -132,6 +130,19 @@ section > .carousel {
 }
 a { color: #1ec8ff; }
 a:hover { color: #fff; }
+/* Overlay invisible qui capture le click partout sur la video carrousel */
+.zoom-trigger {
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  width: 100%; height: 100%;
+  z-index: 5;
+  cursor: pointer;
+  background: transparent;
+}
+.carousel-item:active .zoom-trigger,
+.carousel-item:focus .zoom-trigger {
+  outline: none;
+}
 
 /* --------- MODALE ZOOM VIDEO --------- */
 .zoom-modal {
