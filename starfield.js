@@ -5,8 +5,8 @@ let w, h, stars = [];
 const numStars = 200;
 const SPEED = 0.3;
 // Paramètres pour mieux répartir les étoiles
-const Z_MIN = 0.1 * window.innerWidth; // Distance minimale d'affichage
-const Z_MAX = window.innerWidth;       // Distance maximale
+const Z_MIN = window.innerWidth; // Distance minimale d'affichage
+const Z_MAX = 0.5 * window.innerWidth;       // Distance maximale
 
 function resize() {
   w = window.innerWidth;
