@@ -40,15 +40,13 @@ h2 {
 .carousel {
   display: flex;
   align-items: center;
-  justify-content: center;      /* Ajouté pour centrer */
+  justify-content: center;
   gap: 1rem;
   margin-bottom: 2rem;
   width: 100%;
 }
-
-/* Limitateur de largeur et centrage */
 section > .carousel {
-  max-width: 1200px;           /* Ajuste à ta préférence */
+  max-width: 1200px;
   margin-left: auto;
   margin-right: auto;
 }
@@ -119,9 +117,71 @@ img.horizontal {
   img.vertical, img.horizontal, .carousel-horizontal img.horizontal { height: 38vw; }
 }
 
-a {
-  color: #1ec8ff;
+a { color: #1ec8ff; }
+a:hover { color: #fff; }
+
+/* MODALE VIDÉO */
+.modal {
+  position: fixed;
+  z-index: 1001;
+  top:0; left:0; right:0; bottom:0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
-a:hover {
+.modal-overlay {
+  position: fixed;
+  top:0; left:0; width:100vw; height:100vh;
+  background: rgba(0,0,0,0.7);
+  cursor: pointer;
+}
+.modal-content {
+  position: relative;
+  background: #181920;
+  border-radius: 10px;
+  padding: 0;
+  box-shadow: 0 0 40px #000a;
+  width: 90vw;
+  max-width: 640px;
+  max-height: 80vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.modal-close {
+  position: absolute;
+  top: 7px;
+  right: 14px;
+  border: none;
+  background: transparent;
   color: #fff;
+  font-size: 2rem;
+  cursor: pointer;
+  z-index: 2;
+}
+.modal-video-container {
+  width: 100%;
+  height: 400px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.modal-video-container iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+  border-radius: 8px;
+  background: #000;
+}
+@media (max-width: 700px) {
+  .modal-content {
+    width: 98vw;
+    max-width: none;
+    max-height: 90vh;
+  }
+  .modal-video-container, .modal-video-container iframe {
+    height: 45vw;
+    min-height: 200px;
+    max-height: 65vh;
+  }
 }
