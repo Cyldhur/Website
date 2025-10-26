@@ -7,6 +7,7 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
+  <!-- Fond étoilé -->
   <canvas id="starfield"></canvas>
 
   <header>
@@ -36,7 +37,7 @@
           <div class="carousel-item">
             <div class="carousel-video">
               <iframe
-                src="https://www.youtube.com/embed/HJQHvL5H0bo"
+                src="https://www.youtube.com/embed/dQw4w9WgXcQ"
                 title="Short Example 2"
                 frameborder="0"
                 allow="autoplay; fullscreen; picture-in-picture"
@@ -45,6 +46,7 @@
             </div>
             <h3>Short Example 2</h3>
           </div>
+          <!-- Duplique pour plus de vidéos verticales -->
         </div>
         <button class="carousel-btn next" aria-label="Suivant">›</button>
       </div>
@@ -80,6 +82,7 @@
             </div>
             <h3>Best Of Example 2</h3>
           </div>
+          <!-- Duplique pour plus de best of -->
         </div>
         <button class="carousel-btn next" aria-label="Suivant">›</button>
       </div>
@@ -90,7 +93,17 @@
     <a href="mailto:monemail@email.com">Contact</a>
   </footer>
 
-  <!-- Fond étoilé + carrousel script standard -->
+  <!-- Modale Zoom vidéo -->
+  <div id="zoom-modal" class="zoom-modal" style="display:none;">
+    <div class="zoom-modal-overlay"></div>
+    <div class="zoom-modal-content">
+      <button class="zoom-modal-close" aria-label="Fermer la vidéo">✕</button>
+      <div class="zoom-modal-video"></div>
+      <div class="zoom-modal-title"></div>
+    </div>
+  </div>
+
+  <!-- Fond étoilé + carrousel script + zoom modal -->
   <script src="starfield.js"></script>
   <script>
     // Carousel scroll
@@ -103,7 +116,52 @@
         track.scrollBy({left: +track.offsetWidth * 0.7, behavior:'smooth'});
       };
     });
+
+    // Zoom modal au clic sur video
+    document.querySelectorAll('.carousel-item').forEach(item => {
+      item.onclick = function(e) {
+        // évite bug si on clique ENCORE sur l'iframe déjà zoomé
+        if(e.target.tagName === 'IFRAME') return;
+        let iframe = item.querySelector('.carousel-video iframe');
+        let title = item.querySelector('h3') ? item.querySelector('h3').textContent : '';
+        if (!iframe) return;
+        let zoomModal = document.getElementById('zoom-modal');
+        let container = zoomModal.querySelector('.zoom-modal-video');
+        let titleEl = zoomModal.querySelector('.zoom-modal-title');
+        container.innerHTML = '';
+        // Recrée un nouvel iframe pour éviter les soucis de double lecture
+        let newIframe = document.createElement('iframe');
+        newIframe.src = iframe.src;
+        newIframe.setAttribute('allowfullscreen','');
+        newIframe.setAttribute('allow','autoplay; fullscreen; picture-in-picture');
+        newIframe.allow = "autoplay; fullscreen; picture-in-picture";
+        newIframe.width = '100%';
+        newIframe.height = '100%';
+        newIframe.style.borderRadius = '12px';
+        container.appendChild(newIframe);
+        titleEl.textContent = title;
+        zoomModal.style.display = 'flex';
+        document.body.style.overflow='hidden';
+      }
+    });
+
+    // Fermer la modale (overlay/croix)
+    document.querySelectorAll('.zoom-modal-close, .zoom-modal-overlay').forEach(el => {
+      el.onclick = function() {
+        let zoomModal = document.getElementById('zoom-modal');
+        zoomModal.style.display = 'none';
+        zoomModal.querySelector('.zoom-modal-video').innerHTML = '';
+        document.body.style.overflow='';
+      }
+    });
+    document.addEventListener('keydown', function(e) {
+      if (e.key === "Escape") {
+        let zoomModal = document.getElementById('zoom-modal');
+        zoomModal.style.display = 'none';
+        zoomModal.querySelector('.zoom-modal-video').innerHTML = '';
+        document.body.style.overflow='';
+      }
+    });
   </script>
 </body>
 </html>
-
