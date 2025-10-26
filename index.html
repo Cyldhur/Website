@@ -31,6 +31,7 @@
                 allow="autoplay; fullscreen; picture-in-picture"
                 allowfullscreen>
               </iframe>
+              <div class="zoom-trigger" title="Agrandir la vidéo"></div>
             </div>
             <h3>Short Example 1</h3>
           </div>
@@ -43,6 +44,7 @@
                 allow="autoplay; fullscreen; picture-in-picture"
                 allowfullscreen>
               </iframe>
+              <div class="zoom-trigger" title="Agrandir la vidéo"></div>
             </div>
             <h3>Short Example 2</h3>
           </div>
@@ -67,6 +69,7 @@
                 allow="autoplay; fullscreen; picture-in-picture"
                 allowfullscreen>
               </iframe>
+              <div class="zoom-trigger" title="Agrandir la vidéo"></div>
             </div>
             <h3>Best Of Example 1</h3>
           </div>
@@ -79,6 +82,7 @@
                 allow="autoplay; fullscreen; picture-in-picture"
                 allowfullscreen>
               </iframe>
+              <div class="zoom-trigger" title="Agrandir la vidéo"></div>
             </div>
             <h3>Best Of Example 2</h3>
           </div>
@@ -103,7 +107,7 @@
     </div>
   </div>
 
-  <!-- Fond étoilé + carrousel script + zoom modal -->
+  <!-- Fond étoilé + carrousel/zoom scripts -->
   <script src="starfield.js"></script>
   <script>
     // Carousel scroll
@@ -117,21 +121,22 @@
       };
     });
 
-    // Zoom modal au clic sur video
-    document.querySelectorAll('.carousel-item').forEach(item => {
-      item.onclick = function(e) {
-        // évite bug si on clique ENCORE sur l'iframe déjà zoomé
-        if(e.target.tagName === 'IFRAME') return;
+    // Zoom modal vidéo – clique sur .zoom-trigger
+    document.querySelectorAll('.zoom-trigger').forEach(trigger => {
+      trigger.onclick = function(e) {
+        const item = trigger.closest('.carousel-item');
         let iframe = item.querySelector('.carousel-video iframe');
         let title = item.querySelector('h3') ? item.querySelector('h3').textContent : '';
         if (!iframe) return;
+        // Ajoute autoplay=1 à l'URL (pour forcer la lecture)
+        let url = new URL(iframe.src, window.location.origin);
+        url.searchParams.set('autoplay', '1');
         let zoomModal = document.getElementById('zoom-modal');
         let container = zoomModal.querySelector('.zoom-modal-video');
         let titleEl = zoomModal.querySelector('.zoom-modal-title');
         container.innerHTML = '';
-        // Recrée un nouvel iframe pour éviter les soucis de double lecture
         let newIframe = document.createElement('iframe');
-        newIframe.src = iframe.src;
+        newIframe.src = url.toString();
         newIframe.setAttribute('allowfullscreen','');
         newIframe.setAttribute('allow','autoplay; fullscreen; picture-in-picture');
         newIframe.allow = "autoplay; fullscreen; picture-in-picture";
@@ -142,6 +147,9 @@
         titleEl.textContent = title;
         zoomModal.style.display = 'flex';
         document.body.style.overflow='hidden';
+        e.preventDefault();
+        e.stopPropagation();
+        return false;
       }
     });
 
