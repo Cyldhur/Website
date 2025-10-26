@@ -7,28 +7,80 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <!-- Fond animé en canvas -->
+  <!-- Fond étoilé -->
   <canvas id="starfield"></canvas>
-  <!-- Contenu du site -->
+
   <header>
     <h1>Prénom Nom</h1>
     <p>Monteur vidéo | Portfolio</p>
   </header>
+
   <main>
-    <section class="video-gallery">
-      <div class="video-card">
-        <a href="https://youtube.com/..." target="_blank">
-          <img src="thumb1.webp" alt="Vidéo 1" loading="lazy">
-          <h3>Titre Vidéo 1</h3>
-          <p>Petite description</p>
-        </a>
+    <!-- Formats Courts (vertical) -->
+    <section>
+      <h2>Formats Courts</h2>
+      <div class="carousel carousel-vertical">
+        <button class="carousel-btn prev" aria-label="Précédent">‹</button>
+        <div class="carousel-track">
+          <div class="carousel-item">
+            <a href="https://youtube.com/" target="_blank" title="Voir la vidéo">
+              <img src="thumb_court1.webp" alt="Vidéo short 1" class="vertical" loading="lazy">
+              <h3>Short Example 1</h3>
+            </a>
+          </div>
+          <div class="carousel-item">
+            <a href="https://youtube.com/" target="_blank" title="Voir la vidéo">
+              <img src="thumb_court2.webp" alt="Vidéo short 2" class="vertical" loading="lazy">
+              <h3>Short Example 2</h3>
+            </a>
+          </div>
+          <!-- Ajoute d'autres vidéos verticales ici en dupliquant le bloc ci-dessus -->
+        </div>
+        <button class="carousel-btn next" aria-label="Suivant">›</button>
       </div>
-      <!-- ... Plus de vidéos ... -->
+    </section>
+
+    <!-- Formats Best of (horizontal) -->
+    <section>
+      <h2>Formats Best of</h2>
+      <div class="carousel carousel-horizontal">
+        <button class="carousel-btn prev" aria-label="Précédent">‹</button>
+        <div class="carousel-track">
+          <div class="carousel-item">
+            <a href="https://youtube.com/" target="_blank" title="Voir la vidéo">
+              <img src="thumb_bo1.webp" alt="Vidéo best of 1" class="horizontal" loading="lazy">
+              <h3>Best Of Example 1</h3>
+            </a>
+          </div>
+          <div class="carousel-item">
+            <a href="https://youtube.com/" target="_blank" title="Voir la vidéo">
+              <img src="thumb_bo2.webp" alt="Vidéo best of 2" class="horizontal" loading="lazy">
+              <h3>Best Of Example 2</h3>
+            </a>
+          </div>
+          <!-- Ajoute d'autres vidéos horizontales ici en dupliquant le bloc ci-dessus -->
+        </div>
+        <button class="carousel-btn next" aria-label="Suivant">›</button>
+      </div>
     </section>
   </main>
+
   <footer>
-    <a href="mailto:email@example.com">Contact</a>
+    <a href="mailto:monemail@email.com">Contact</a>
   </footer>
+
   <script src="starfield.js"></script>
+  <script>
+  // JS basique pour le carrousel (scroll)
+  document.querySelectorAll('.carousel').forEach(carousel => {
+    const track = carousel.querySelector('.carousel-track');
+    carousel.querySelector('.prev').onclick = () => {
+      track.scrollBy({left: -track.offsetWidth * 0.7, behavior:'smooth'});
+    };
+    carousel.querySelector('.next').onclick = () => {
+      track.scrollBy({left: +track.offsetWidth * 0.7, behavior:'smooth'});
+    };
+  });
+  </script>
 </body>
 </html>
