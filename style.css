@@ -32,7 +32,7 @@ h2 {
   letter-spacing: .06em;
 }
 
-/* Carousel centré sur la page */
+/* Carrousels centrés */
 .carousel {
   display: flex;
   align-items: center;
@@ -76,7 +76,9 @@ section > .carousel {
   box-shadow: 0 2px 8px #0213;
   width: 180px;
   text-align: center;
-  transition: box-shadow .2s;
+  transition: transform .23s cubic-bezier(.4,1.7,.6,.8), box-shadow .22s;
+  cursor: pointer;
+  /* Survol */
 }
 .carousel-item h3 {
   color: #1ec8ff;
@@ -86,7 +88,21 @@ section > .carousel {
 .carousel-item a { text-decoration: none; }
 .carousel-item a:hover h3 { color: #fff; }
 
-/* -------- Ajoutez ↓↓↓↓↓↓ --------- */
+/* Effet grossissant au survol */
+.carousel-item:hover,
+.carousel-item:focus-within {
+  box-shadow: 0 4px 28px #21e8ff56;
+  transform: scale(1.065);
+  z-index: 2;
+}
+.carousel-item:hover .carousel-video,
+.carousel-item:focus-within .carousel-video {
+  box-shadow: 0 0 0 4px #1ec8ff77;
+  filter: brightness(1.07) saturate(1.08);
+  transition: box-shadow .3s, filter .3s;
+}
+
+/* -------- Embeds vidéo --------- */
 .carousel-video {
   width: 100%;
   background: #111;
@@ -106,17 +122,77 @@ section > .carousel {
   background: #111;
   border: none;
 }
-/* -------- Fin de l'ajout --------- */
-
 /* Pour carousel horizontal plus large sur desktop */
 .carousel-horizontal .carousel-item { width: 270px; }
 .carousel-horizontal .carousel-video { min-height: 150px; }
-/* Responsive mobile */
 @media (max-width: 800px) {
   .carousel-track { gap: 8px; }
   .carousel-item, .carousel-horizontal .carousel-item { width: 52vw; }
   .carousel-video, .carousel-horizontal .carousel-video, .carousel-vertical .carousel-video { min-height: 38vw; }
 }
-
 a { color: #1ec8ff; }
 a:hover { color: #fff; }
+
+/* --------- MODALE ZOOM VIDEO --------- */
+.zoom-modal {
+  position: fixed; z-index: 2000;
+  left:0; top:0; bottom:0; right:0;
+  width:100vw; height:100vh;
+  display: none;
+  justify-content: center;
+  align-items: center;
+}
+.zoom-modal-overlay {
+  position:fixed; top:0; left:0; right:0; bottom:0;
+  width:100vw; height:100vh;
+  background:rgba(0,0,0,0.87);
+  cursor:pointer;
+}
+.zoom-modal-content {
+  position: relative;
+  background: #171b23;
+  border-radius: 16px;
+  box-shadow: 0 0 48px #11cdfc55;
+  padding: 18px 8px 14px 8px;
+  max-width: 96vw;
+  max-height: 92vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  z-index:2;
+}
+.zoom-modal-close {
+  position:absolute; top:9px; right:17px;
+  background: none; border: none;
+  color: #fff; font-size:2rem; cursor:pointer;
+  z-index:3;
+  transition: color .2s;
+}
+.zoom-modal-close:hover { color: #1ec8ff;}
+.zoom-modal-video {
+  width: 76vw;
+  max-width: 850px;
+  aspect-ratio: 16/9;
+  background: #000;
+  border-radius: 12px;
+  box-shadow: 0 0 12px #222b;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.zoom-modal-video iframe {
+  width: 100%; height: 100%;
+  border-radius:12px;
+  background: #000;
+  border: none;
+}
+.zoom-modal-title {
+  margin-top: 1.5rem;
+  font-size: 1.1em;
+  color: #fff;
+  text-align: center;
+}
+@media (max-width: 700px) {
+  .zoom-modal-video { width:98vw; }
+  .zoom-modal-content { max-width: 100vw; padding: 3px 1px 7px 1px; }
+}
