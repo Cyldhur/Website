@@ -28,19 +28,31 @@ main {
   margin-bottom: 3rem;
 }
 
-/* SECTION */
+/* Titres centrés */
 h2 {
-  text-align: left;
-  margin: 2rem 0 1rem 2vw;
+  text-align: center;
+  margin: 2rem 0 1rem 0;
   font-weight: bold;
   letter-spacing: .06em;
 }
+
+/* Carousel centré sur la page */
 .carousel {
   display: flex;
   align-items: center;
-  margin: 0 2vw 2rem 2vw;
+  justify-content: center;      /* Ajouté pour centrer */
   gap: 1rem;
+  margin-bottom: 2rem;
+  width: 100%;
 }
+
+/* Limitateur de largeur et centrage */
+section > .carousel {
+  max-width: 1200px;           /* Ajuste à ta préférence */
+  margin-left: auto;
+  margin-right: auto;
+}
+
 .carousel-btn {
   background: #222a;
   border: none;
@@ -106,6 +118,7 @@ img.horizontal {
   .carousel-item, .carousel-horizontal .carousel-item { width: 52vw; }
   img.vertical, img.horizontal, .carousel-horizontal img.horizontal { height: 38vw; }
 }
+
 a {
   color: #1ec8ff;
 }
