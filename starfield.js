@@ -1,8 +1,12 @@
 const canvas = document.getElementById('starfield');
 const ctx = canvas.getContext('2d');
+
 let w, h, stars = [];
 const numStars = 200;
 const SPEED = 0.3;
+// Paramètres pour mieux répartir les étoiles
+const Z_MIN = 0.1 * window.innerWidth; // Distance minimale d'affichage
+const Z_MAX = window.innerWidth;       // Distance maximale
 
 function resize() {
   w = window.innerWidth;
@@ -13,48 +17,49 @@ function resize() {
 window.addEventListener('resize', resize);
 resize();
 
+function randomStar() {
+  // Répartition circulaire plus homogène
+  const theta = Math.random() * 2 * Math.PI;
+  const radius = Math.sqrt(Math.random()) * w / 2;
+  return {
+    x: Math.cos(theta) * radius,
+    y: Math.sin(theta) * radius,
+    z: Math.random() * (Z_MAX - Z_MIN) + Z_MIN,
+  };
+}
+
 function createStars() {
   stars = [];
   for (let i = 0; i < numStars; i++) {
-    // Distribution polaire : angle et distance par rapport au centre
-    let angle = Math.random() * 2 * Math.PI;
-    let radius = Math.sqrt(Math.random()) * Math.max(w, h) / 2; // √ pour une vraie répartition uniforme
-    stars.push({
-      // position initiale sur un disque (autour du centre)
-      baseX: Math.cos(angle) * radius,
-      baseY: Math.sin(angle) * radius,
-      z: Math.random() * w
-    });
+    stars.push(randomStar());
   }
 }
 createStars();
 
 function draw() {
   ctx.fillStyle = "#000";
-  ctx.fillRect(0,0,w,h);
+  ctx.fillRect(0, 0, w, h);
 
   for (let i = 0; i < numStars; i++) {
     let star = stars[i];
 
+    // Déplacer l'étoile
     star.z -= SPEED;
-    if (star.z < 1) {
-      // On recycle l'étoile loin derrière, sur un cercle
-      let angle = Math.random() * 2 * Math.PI;
-      let radius = Math.sqrt(Math.random()) * Math.max(w, h) / 2;
-      star.baseX = Math.cos(angle) * radius;
-      star.baseY = Math.sin(angle) * radius;
-      star.z = w;
+    // Quand trop près, on la replace loin (évite l'amas au centre)
+    if (star.z < Z_MIN) {
+      stars[i] = randomStar();
+      stars[i].z = Z_MAX;
+      continue;
     }
 
-    // Perspective centrée
+    // Projection perspective
     let k = 128.0 / star.z;
-    let sx = Math.floor(w/2 + star.baseX * k);
-    let sy = Math.floor(h/2 + star.baseY * k);
+    let sx = Math.floor(w / 2 + star.x * k);
+    let sy = Math.floor(h / 2 + star.y * k);
 
-    // On ne dessine que dans le canvas
-    if(sx >=0 && sx<w && sy>=0 && sy<h) {
-      // Moins de taille max :
-      let size = Math.min(2, (1 - star.z / w) * 2 + 1);
+    // Dessiner si à l'écran
+    if (sx >= 0 && sx < w && sy >= 0 && sy < h) {
+      let size = (1 - star.z / Z_MAX) * 2 + 1;
       ctx.fillStyle = "#fff";
       ctx.fillRect(sx, sy, size, size);
     }
