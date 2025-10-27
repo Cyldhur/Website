@@ -39,7 +39,7 @@ h2 {
   gap: 1rem;  
   margin-bottom: 2rem;  
   width: 100%;  
-  overflow: visible !important; /* Correction */  
+  overflow: visible !important;  
 }  
 section > .carousel {  
   max-width: 1200px;  
@@ -47,7 +47,7 @@ section > .carousel {
   margin-right: auto;  
 }  
 .carousel-btn {  
-  background: #222a;  
+  background: #232329;  
   border: none;  
   color: #fff;  
   font-size: 2em;  
@@ -55,10 +55,10 @@ section > .carousel {
   border-radius: 50%;  
   cursor: pointer;  
   z-index: 1;  
-  transition: background .15s;  
-  align-self: center; /* Correction pour centrage vertical des flèches */  
+  transition: background .15s, color .15s;  
+  align-self: center;  
 }  
-.carousel-btn:hover { background: #1ec8ff; color:#000; }  
+.carousel-btn:hover { background: #fff; color:#222; }  
 .carousel-track {  
   position: relative;  
   overflow-x: auto;  
@@ -69,12 +69,12 @@ section > .carousel {
   scrollbar-width: none;  
   -ms-overflow-style: none;  
   padding-bottom: 10px;  
-  overflow: visible !important; /* Ajouté */
+  overflow: visible !important;  
 }  
 .carousel-track::-webkit-scrollbar { display: none; }  
 .carousel-item {  
   flex: 0 0 auto;  
-  background: rgba(20,20,30,0.7);  
+  background: rgba(25,25,30,0.78);  
   border-radius: 8px;  
   padding: 0 0 10px 0;  
   box-shadow: 0 2px 8px #0213;  
@@ -86,22 +86,34 @@ section > .carousel {
   z-index: 1;  
 }  
 .carousel-item h3 {  
-  color: #1ec8ff;  
+  background: #232329;
+  color: #fff;  
   margin: 0.5rem 0 0 0;  
   font-size: 1em;  
-}  
+  padding: .4em 0;
+  border-radius: 6px;
+  width: 80%;
+  margin-left: auto; margin-right: auto;
+  box-shadow: 0px 1px 5px #0007;
+  letter-spacing: .02em;
+}
 .carousel-item a { text-decoration: none; }  
-.carousel-item a:hover h3 { color: #fff; }  
-  
+.carousel-item a:hover h3 { color: #ededed; background: #232329; }  
 .carousel-item:hover,  
 .carousel-item:focus-within {  
-  box-shadow: 0 0 0 4px #1ec8ff77, 0 4px 28px #21e8ff56;
+  /* Blanc lumineux, ombre douce */
+  box-shadow: 0 0 0 4px #fff, 0 4px 28px #1117;
   transform: scale(1.065);  
   z-index: 3;  
-}  
+}
+.carousel-item:hover h3,  
+.carousel-item:focus-within h3 {
+  color: #ededed;
+  background: #232329;
+}
 .carousel-item:hover .carousel-video,  
 .carousel-item:focus-within .carousel-video {  
-  filter: brightness(1.07) saturate(1.08);  
+  filter: brightness(1.08) saturate(1.08);  
   transition: filter .3s;  
 }  
   
@@ -133,8 +145,8 @@ section > .carousel {
   .carousel-item, .carousel-horizontal .carousel-item { width: 52vw; }  
   .carousel-video, .carousel-horizontal .carousel-video, .carousel-vertical .carousel-video { min-height: 38vw; }  
 }
-a { color: #1ec8ff; }  
-a:hover { color: #fff; }  
+a { color: #fff; transition: color .22s; }  
+a:hover { color: #ededed; }  
 /* Overlay invisible qui capture le click partout sur la video carrousel */  
 .zoom-trigger {  
   position: absolute;  
@@ -166,9 +178,9 @@ a:hover { color: #fff; }
 }  
 .zoom-modal-content {  
   position: relative;  
-  background: #171b23;  
+  background: #1b1b22;  
   border-radius: 16px;  
-  box-shadow: 0 0 48px #11cdfc55;  
+  box-shadow: 0 0 48px #23232999;  
   padding: 18px 8px 14px 8px;  
   max-width: 96vw;  
   max-height: 92vh;  
@@ -184,7 +196,7 @@ a:hover { color: #fff; }
   z-index:3;  
   transition: color .2s;  
 }  
-.zoom-modal-close:hover { color: #1ec8ff;}  
+.zoom-modal-close:hover { color: #ededed;}  
 .zoom-modal-video {  
   width: 76vw;  
   max-width: 850px;  
