@@ -39,7 +39,7 @@ h2 {
   gap: 1rem;  
   margin-bottom: 2rem;  
   width: 100%;  
-  overflow: visible !important; /* Ajouté */  
+  overflow: visible !important; /* Correction */  
 }  
 section > .carousel {  
   max-width: 1200px;  
@@ -56,18 +56,20 @@ section > .carousel {
   cursor: pointer;  
   z-index: 1;  
   transition: background .15s;  
+  align-self: center; /* Correction pour centrage vertical des flèches */  
 }  
 .carousel-btn:hover { background: #1ec8ff; color:#000; }  
 .carousel-track {  
   position: relative;  
   overflow-x: auto;  
-  overflow-y: visible !important; /* Modifié */  
+  overflow-y: visible !important;  
   display: flex;  
   gap: 1.2rem;  
   scroll-behavior: smooth;  
   scrollbar-width: none;  
   -ms-overflow-style: none;  
   padding-bottom: 10px;  
+  overflow: visible !important; /* Ajouté */
 }  
 .carousel-track::-webkit-scrollbar { display: none; }  
 .carousel-item {  
@@ -80,8 +82,8 @@ section > .carousel {
   text-align: center;  
   transition: transform .23s cubic-bezier(.4,1.7,.6,.8), box-shadow .22s, z-index .21s;  
   cursor: pointer;  
-  overflow: visible; /* Ajouté */  
-  z-index: 1;      /* Ajouté, base, voir hover ci-dessous */
+  overflow: visible;  
+  z-index: 1;  
 }  
 .carousel-item h3 {  
   color: #1ec8ff;  
@@ -91,18 +93,16 @@ section > .carousel {
 .carousel-item a { text-decoration: none; }  
 .carousel-item a:hover h3 { color: #fff; }  
   
-/* Effet grossissant au survol */  
 .carousel-item:hover,  
 .carousel-item:focus-within {  
-  box-shadow: 0 4px 28px #21e8ff56;  
+  box-shadow: 0 0 0 4px #1ec8ff77, 0 4px 28px #21e8ff56;
   transform: scale(1.065);  
-  z-index: 3;      /* Surélevé uniquement au hover */  
+  z-index: 3;  
 }  
 .carousel-item:hover .carousel-video,  
 .carousel-item:focus-within .carousel-video {  
-  box-shadow: 0 0 0 4px #1ec8ff77;  
   filter: brightness(1.07) saturate(1.08);  
-  transition: box-shadow .3s, filter .3s;  
+  transition: filter .3s;  
 }  
   
 /* -------- Embeds vidéo --------- */  
@@ -113,7 +113,7 @@ section > .carousel {
   align-items: center;  
   justify-content: center;  
   border-radius: 7px 7px 0 0;  
-  overflow: hidden;  
+  overflow: visible;  
   position: relative;  
 }  
 .carousel-horizontal .carousel-video { aspect-ratio: 16 / 9; min-height: 115px; }  
@@ -132,7 +132,7 @@ section > .carousel {
   .carousel-track { gap: 8px; }  
   .carousel-item, .carousel-horizontal .carousel-item { width: 52vw; }  
   .carousel-video, .carousel-horizontal .carousel-video, .carousel-vertical .carousel-video { min-height: 38vw; }  
-}  
+}
 a { color: #1ec8ff; }  
 a:hover { color: #fff; }  
 /* Overlay invisible qui capture le click partout sur la video carrousel */  
