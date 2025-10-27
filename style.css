@@ -102,7 +102,6 @@ section > .carousel {
 .carousel-item:hover,
 .carousel-item:focus-within {
   box-shadow:
-      0 0 0 4px rgba(255,255,255,0.82),
       0 6px 26px 3px rgba(255,255,255,0.17),
       0 0 32px 12px rgba(255,255,255,0.12);
   transform: scale(1.065);
