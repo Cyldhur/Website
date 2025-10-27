@@ -99,12 +99,14 @@ section > .carousel {
 }
 .carousel-item a { text-decoration: none; }  
 .carousel-item a:hover h3 { color: #ededed; background: #232329; }  
-.carousel-item:hover,  
-.carousel-item:focus-within {  
-  /* Blanc lumineux, ombre douce */
-  box-shadow: 0 0 0 4px #fff, 0 4px 28px #1117;
-  transform: scale(1.065);  
-  z-index: 3;  
+.carousel-item:hover,
+.carousel-item:focus-within {
+  box-shadow:
+      0 0 0 4px rgba(255,255,255,0.82),
+      0 6px 26px 3px rgba(255,255,255,0.17),
+      0 0 32px 12px rgba(255,255,255,0.12);
+  transform: scale(1.065);
+  z-index: 3;
 }
 .carousel-item:hover h3,  
 .carousel-item:focus-within h3 {
