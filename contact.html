@@ -6,21 +6,48 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <a href="index.html" class="contact-btn-top">Accueil</a>
-    <main class="linktree-main">
-        <h1>Me retrouver :</h1>
-        <div class="linktree-links">
-            <a href="https://twitter.com/tonpseudo" target="_blank" class="link-btn">
-                <img src="https://github.com/Cyldhur/Website/raw/main/logos/X_logo.png" alt="Logo X/Twitter" class="link-btn-logo">
+    <nav>
+        <a href="index.html" class="contact-btn-top">Accueil</a>
+    </nav>
+
+    <main>
+        <section style="max-width:500px;margin:80px auto 0;text-align:center;">
+            <h1>Me retrouver&nbsp;:</h1><br>
+
+            <!-- Bouton Twitter/X -->
+            <a href="https://twitter.com/" 
+                class="contact-btn-top" style="position:static;display:inline-flex;align-items:center;margin:8px 0;text-decoration:none;">
+                <img src="logos/X_logo.png" alt="Logo X" class="contact-logo">
                 Twitter / X
             </a>
-            <a href="https://discord.com/users/tonid" target="_blank" class="link-btn">
-                <img src="https://github.com/Cyldhur/Website/raw/main/logos/discord_logo.png" alt="Logo Discord" class="link-btn-logo">
-                Discord : TonPseudo#0000
-            </a>
-        </div>
+            <br><br>
+            
+            <!-- Bouton Discord (copie pseudo) -->
+            <button 
+                id="discord-btn" 
+                class="contact-btn-top"
+                style="position:static;display:inline-flex;align-items:center;margin:8px 0;cursor:pointer;">
+                <img src="logos/discord_logo.png" alt="Logo Discord" class="contact-logo">
+                <span id="discord-pseudo">TonPseudo#0000</span>
+            </button>
+            <div id="copied-message" style="color:#19cf65;font-weight:bold;display:none;margin-top:8px;">
+                Pseudo copié !
+            </div>
+        </section>
     </main>
-    <canvas id="starfield"></canvas>
-    <script src="starfield.js"></script>
+
+    <script>
+    // Fonction pour copier le pseudo Discord
+    document.getElementById('discord-btn').addEventListener('click', function() {
+        var pseudo = document.getElementById('discord-pseudo').textContent;
+        navigator.clipboard.writeText(pseudo).then(function() {
+            var msg = document.getElementById('copied-message');
+            msg.style.display = 'block';
+            setTimeout(function(){ msg.style.display = 'none'; }, 1700);
+        }, function(err) {
+            alert("Erreur lors de la copie du pseudo");
+        });
+    });
+    </script>
 </body>
 </html>
