@@ -1,83 +1,111 @@
-body {  
-  margin: 0;  
-  color: #fff;  
-  background: #000;  
-  font-family: system-ui, sans-serif;  
-}  
-  
-#starfield {  
-  position: fixed;  
-  left: 0; top: 0;  
-  width: 100vw; height: 100vh;  
-  z-index: -1;  
-  display: block;  
-  background: #000;  
-}  
-  
-header, footer {  
-  text-align: center;  
-  padding: 1.5rem;  
-  background: rgba(0,0,0,0.7);  
-}  
-footer {  
-  margin-top: 2rem;  
-}  
-main {  
-  margin-bottom: 3rem;  
-}  
-h2 {  
-  text-align: center;  
-  margin: 2rem 0 1rem 0;  
-  font-weight: bold;  
-  letter-spacing: .06em;  
+/* ============================================
+   RESET & BASE
+   ============================================ */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-/* ----------- CAROUSEL (3 VIDEOS CENTREES) -------------- */
+body {
+  font-family: Arial, sans-serif;
+  background: #000;
+  color: #fff;
+  overflow-x: hidden;
+}
+
+/* ============================================
+   STARFIELD CANVAS
+   ============================================ */
+
+#starfield {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  background: #000;
+}
+
+/* ============================================
+   NAVIGATION
+   ============================================ */
+
+nav {
+  padding: 1rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: rgba(0,0,0,0.5);
+  backdrop-filter: blur(10px);
+}
+
+nav a {
+  color: #fff;
+  text-decoration: none;
+  margin: 0 1rem;
+  transition: color 0.3s;
+}
+
+nav a:hover {
+  color: #4a9eff;
+}
+
+/* ============================================
+   SECTIONS
+   ============================================ */
+
+section {
+  padding: 2rem;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+h1, h2, h3 {
+  margin-bottom: 1rem;
+}
+
+/* ============================================
+   CARROUSEL 5 VIDÉOS VISIBLES
+   ============================================ */
+
 .carousel {
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 1rem;
-  margin-bottom: 2rem;
+  margin-bottom: 3rem;
   width: 100%;
-  overflow: visible !important;
+  overflow: visible;
+  position: relative;
+  padding: 2rem 0;
 }
+
 section > .carousel {
-  max-width: 1200px;
+  max-width: 1400px;
   margin-left: auto;
   margin-right: auto;
 }
-.carousel-btn {
-  background: #232329;
-  border: none;
-  color: #fff;
-  font-size: 2em;
-  padding: 0 .5em;
-  border-radius: 50%;
-  cursor: pointer;
-  z-index: 10;
-  transition: background .15s, color .15s;
-  align-self: center;
-  position: relative;
-}
-.carousel-btn:hover { background: #fff; color:#222; }
 
-/* Carrousel 3 vidéos centrées avec animation fluide */
 .carousel-track {
   position: relative;
-  width: 870px;   /* 3x270px + marges entre */
-  min-height: 330px;
+  width: 100%;
+  max-width: 1200px;
+  min-height: 320px;
   height: 100%;
   margin: 0 auto;
   display: block;
+  overflow: hidden;
 }
+
 .carousel-item {
-  width: 270px;     /* Assure la même largeur pour tous les items */
-  height: 320px;    /* Fixe aussi la hauteur pour uniformité */
+  width: 270px;
   position: absolute;
   left: 50%;
   top: 0;
-  transform: translateX(-50%) scale(0.85);
+  transform: translateX(-50%) scale(1);
   opacity: 0;
   z-index: 0;
   pointer-events: none;
@@ -85,222 +113,313 @@ section > .carousel {
   background: rgba(25,25,30,0.78);
   border-radius: 8px;
   padding: 0 0 10px 0;
-  box-shadow: 0 2px 8px #0213;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
   text-align: center;
   overflow: visible;
 }
-.carousel-item.active {
-  transform: translateX(-50%) scale(1.12);
+
+/* 3 vidéos principales au centre - même taille */
+.carousel-item.prev-center,
+.carousel-item.active,
+.carousel-item.next-center {
   opacity: 1;
   z-index: 3;
   pointer-events: auto;
-  filter: none;
-}
-.carousel-item.prev,
-.carousel-item.next {
-  opacity: 0.7;
-  z-index: 2;
-  pointer-events: auto;
-  filter: blur(2px);
-}
-.carousel-item.prev {
-  transform: translateX(calc(-50% - 290px)) scale(1);
-}
-.carousel-item.next {
-  transform: translateX(calc(-50% + 290px)) scale(1);
 }
 
-/* Overlay invisible qui capture le click partout sur la video carrousel */
-.zoom-trigger {
-  position: absolute;
-  top: 0; left: 0; right: 0; bottom: 0;
-  width: 100%; height: 100%;
-  z-index: 5;
+/* Vidéos partiellement visibles sur les côtés avec fade */
+.carousel-item.far-left {
+  opacity: 0.4;
+  z-index: 1;
+  pointer-events: none;
+  mask-image: linear-gradient(to right, transparent 0%, black 50%);
+  -webkit-mask-image: linear-gradient(to right, transparent 0%, black 50%);
+}
+
+.carousel-item.far-right {
+  opacity: 0.4;
+  z-index: 1;
+  pointer-events: none;
+  mask-image: linear-gradient(to left, transparent 0%, black 50%);
+  -webkit-mask-image: linear-gradient(to left, transparent 0%, black 50%);
+}
+
+/* Boutons de navigation */
+.carousel-btn {
+  background: rgba(35, 35, 41, 0.8);
+  border: 1px solid rgba(255,255,255,0.2);
+  color: #fff;
+  font-size: 2em;
+  padding: 0 0.5em;
+  border-radius: 50%;
   cursor: pointer;
-  background: transparent;
-}
-.carousel-item:active .zoom-trigger, .carousel-item:focus .zoom-trigger {
-  outline: none;
+  z-index: 10;
+  transition: background 0.15s, color 0.15s, transform 0.2s;
+  align-self: center;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  backdrop-filter: blur(4px);
 }
 
-/* -------- Embeds vidéo --------- */
+.carousel-btn:hover {
+  background: #fff;
+  color: #222;
+  transform: translateY(-50%) scale(1.1);
+}
+
+.carousel-btn.prev {
+  left: 20px;
+}
+
+.carousel-btn.next {
+  right: 20px;
+}
+
+/* ============================================
+   EMBEDS VIDÉO
+   ============================================ */
+
 .carousel-video {
-  width: 100% !important;       /* Assure largeur max */
-  height: 175px !important;     /* Garde tous les embeds à la même hauteur */
+  width: 100%;
   background: #111;
   display: flex;
   align-items: center;
   justify-content: center;
   border-radius: 7px 7px 0 0;
-  overflow: visible;
+  overflow: hidden;
   position: relative;
 }
+
+.carousel-horizontal .carousel-video {
+  aspect-ratio: 16 / 9;
+  min-height: 150px;
+}
+
+.carousel-vertical .carousel-video {
+  aspect-ratio: 9 / 16;
+  min-height: 320px;
+}
+
 .carousel-video iframe {
-  width: 100% !important;
-  height: 100% !important;
-  min-height: unset !important;
+  width: 100%;
+  height: 100%;
+  min-height: 100%;
   border-radius: 7px 7px 0 0;
   background: #111;
   border: none;
 }
 
-.carousel-horizontal .carousel-item { width: 270px; }
-.carousel-horizontal .carousel-video { min-height: 150px; }
-@media (max-width: 900px) {
-  .carousel-track { width: 100vw; min-height: unset; height: auto; }
-  .carousel-item, .carousel-horizontal .carousel-item {
+.carousel-horizontal .carousel-item {
+  width: 270px;
+}
+
+/* Titre des vidéos */
+.carousel-item h3 {
+  padding: 10px;
+  font-size: 0.95rem;
+  color: #fff;
+  margin: 0;
+}
+
+/* Zoom trigger */
+.zoom-trigger {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  background: rgba(0,0,0,0.7);
+  border: 1px solid rgba(255,255,255,0.3);
+  color: #fff;
+  padding: 5px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: background 0.3s;
+  z-index: 5;
+}
+
+.zoom-trigger:hover {
+  background: rgba(255,255,255,0.2);
+}
+
+/* ============================================
+   MODALE ZOOM VIDÉO
+   ============================================ */
+
+#zoom-modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.95);
+  z-index: 9999;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+}
+
+#zoom-modal.active {
+  display: flex;
+}
+
+.zoom-modal-content {
+  position: relative;
+  width: 90%;
+  max-width: 1200px;
+  background: rgba(25,25,30,0.9);
+  border-radius: 10px;
+  padding: 1rem;
+}
+
+.zoom-modal-video {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  background: #000;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.zoom-modal-video iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+.zoom-modal-title {
+  margin-top: 1rem;
+  font-size: 1.2rem;
+  text-align: center;
+  color: #fff;
+}
+
+.zoom-close {
+  position: absolute;
+  top: -15px;
+  right: -15px;
+  background: #fff;
+  color: #000;
+  border: none;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  font-size: 1.5rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.2s;
+}
+
+.zoom-close:hover {
+  transform: scale(1.1);
+}
+
+/* ============================================
+   RESPONSIVE
+   ============================================ */
+
+@media (max-width: 800px) {
+  .carousel-track {
+    width: 100vw;
+    min-height: unset;
+    height: auto;
+  }
+
+  .carousel-item,
+  .carousel-horizontal .carousel-item {
     width: 90vw !important;
-    height: 60vw !important;
     position: static !important;
     left: 0 !important;
     top: 0 !important;
     transform: none !important;
     opacity: 1 !important;
-    filter: none !important;
+    z-index: 1 !important;
+    pointer-events: auto !important;
+    margin-bottom: 1rem;
   }
-  .carousel-video, .carousel-video iframe {
-    height: 40vw !important;
+
+  .carousel-btn {
+    font-size: 1.5em;
+    padding: 0 0.4em;
+  }
+
+  .carousel-btn.prev {
+    left: 10px;
+  }
+
+  .carousel-btn.next {
+    right: 10px;
+  }
+
+  section {
+    padding: 1rem;
+  }
+
+  nav {
+    padding: 1rem;
+    flex-direction: column;
+    gap: 0.5rem;
   }
 }
-a { color: #fff; transition: color .22s; }
-a:hover { color: #ededed; }
 
-/* Overlay invisible qui capture le click partout sur la video carrousel */
-.zoom-trigger {
-  position: absolute;
-  top: 0; left: 0; right: 0; bottom: 0;
-  width: 100%; height: 100%;
-  z-index: 5;
-  cursor: pointer;
-  background: transparent;
-}
-.carousel-item:active .zoom-trigger, .carousel-item:focus .zoom-trigger {
-  outline: none;
+@media (max-width: 768px) {
+  .carousel-item {
+    width: 220px;
+  }
+
+  .carousel-horizontal .carousel-video {
+    min-height: 115px;
+  }
 }
 
-/* --------- MODALE ZOOM VIDEO --------- */
-.zoom-modal {
-  position: fixed; z-index: 2000;
-  left:0; top:0; bottom:0; right:0;
-  width:100vw; height:100vh;
-  display: none;
-  justify-content: center;
-  align-items: center;
+/* ============================================
+   CONTACT PAGE
+   ============================================ */
+
+.contact-container {
+  max-width: 800px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background: rgba(25,25,30,0.8);
+  border-radius: 10px;
 }
-.zoom-modal-overlay {
-  position:fixed; top:0; left:0; right:0; bottom:0;
-  width:100vw; height:100vh;
-  background:rgba(0,0,0,0.87);
-  cursor:pointer;
-}
-.zoom-modal-content {
-  position: relative;
-  background: #1b1b22;
-  border-radius: 16px;
-  box-shadow: 0 0 48px #23232999;
-  padding: 18px 8px 14px 8px;
-  max-width: 96vw;
-  max-height: 92vh;
+
+.social-links {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  z-index:2;
+  gap: 1rem;
+  margin-top: 2rem;
 }
-.zoom-modal-close {
-  position:absolute; top:9px; right:17px;
-  background: none; border: none;
-  color: #fff; font-size:2rem; cursor:pointer;
-  z-index:3;
-  transition: color .2s;
-}
-.zoom-modal-close:hover { color: #ededed;}
-.zoom-modal-video {
-  width: 76vw;
-  max-width: 850px;
-  aspect-ratio: 16/9;
-  background: #000;
-  border-radius: 12px;
-  box-shadow: 0 0 12px #222b;
+
+.social-link {
   display: flex;
   align-items: center;
-  justify-content: center;
-}
-.zoom-modal-video iframe {
-  width: 100%; height: 100%;
-  border-radius:12px;
-  background: #000;
-  border: none;
-}
-.zoom-modal-title {
-  margin-top: 1.5rem;
-  font-size: 1.1em;
+  padding: 1rem;
+  background: rgba(255,255,255,0.1);
+  border-radius: 8px;
+  text-decoration: none;
   color: #fff;
+  transition: background 0.3s;
+}
+
+.social-link:hover {
+  background: rgba(255,255,255,0.2);
+}
+
+/* ============================================
+   UTILITAIRES
+   ============================================ */
+
+.text-center {
   text-align: center;
 }
-@media (max-width: 700px) {
-  .zoom-modal-video { width:98vw; }
-  .zoom-modal-content { max-width: 100vw; padding: 3px 1px 7px 1px; }
+
+.mt-2 {
+  margin-top: 2rem;
 }
 
-/* Bouton Contact en haut à droite */
-.contact-btn-top {
-  position: fixed;
-  top: 30px;
-  right: 32px;
-  z-index: 100;
-  padding: 0.65em 1.5em;
-  background: #232329cc;
-  color: #fff;
-  border-radius: 20px;
-  font-weight: 600;
-  letter-spacing: .03em;
-  border: 1px solid #fff2;
-  box-shadow: 0 2px 12px #0003;
-  transition: background .18s, color .18s, box-shadow .18s;
-  text-decoration: none;
-  font-size: 1.07em;
-  cursor: pointer;
-}
-.contact-btn-top:hover {
-  background: #fff;
-  color: #232329;
-  box-shadow: 0 4px 22px #fff4;
-  border: 1px solid #fff6;
-}
-
-/* Bouton Contact en bas (footer) */
-.contact-btn-bottom {
-  display: inline-block;
-  margin: 0.5em 0;
-  padding: 0.5em 1.3em;
-  background: #232329cc;
-  color: #fff;
-  border-radius: 20px;
-  font-weight: 600;
-  border: 1px solid #fff2;
-  box-shadow: 0 1px 6px #0002;
-  text-decoration: none;
-  transition: background .18s, color .18s, box-shadow .18s;
-  font-size: 1.07em;
-}
-.contact-btn-bottom:hover {
-  background: #fff;
-  color: #232329;
-  box-shadow: 0 2px 8px #fff3;
-  border: 1px solid #fff6;
-}
-@media (max-width: 650px) {
-  .contact-btn-top {
-    top: 16px; right: 12px; font-size: 1em; padding: 0.55em 1em;
-  }
-}
-
-/* Logos réseaux sociaux */
-.contact-logo {
-  height: 24px;
-  width: 24px;
-  vertical-align: middle;
-  margin-right: 8px;
-  border-radius: 8px;
-  object-fit: contain;
+.mb-2 {
+  margin-bottom: 2rem;
 }
