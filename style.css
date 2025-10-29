@@ -1,4 +1,4 @@
-/* Style global */
+/* --- Global styles --- */
 html, body {
   height: 100%;
   margin: 0;
@@ -8,17 +8,17 @@ html, body {
   font-family: 'Segoe UI', 'Arial', sans-serif;
 }
 
-/* Overlay starfield full background */
+/* --- Starfield background --- */
 #starfield {
   position: fixed;
-  top: 0; left: 0;
+  left: 0; top: 0;
   width: 100vw; height: 100vh;
   z-index: -1;
   display: block;
   background: #000;
 }
 
-/* Bouton Accueil en haut à droite */
+/* --- Bouton Contact en haut à droite --- */
 .contact-btn-top {
   position: fixed;
   top: 30px;
@@ -44,7 +44,106 @@ html, body {
   border: 1px solid #fff6;
 }
 
-/* Centrage façon Linktree */
+/* --- Bouton Contact en bas (footer) --- */
+.contact-btn-bottom {
+  display: inline-block;
+  margin: 0.5em 0;
+  padding: 0.5em 1.3em;
+  background: #232329cc;
+  color: #fff;
+  border-radius: 20px;
+  font-weight: 600;
+  border: 1px solid #fff2;
+  box-shadow: 0 1px 6px #0002;
+  text-decoration: none;
+  transition: background .18s, color .18s, box-shadow .18s;
+  font-size: 1.07em;
+}
+.contact-btn-bottom:hover {
+  background: #fff;
+  color: #232329;
+  box-shadow: 0 2px 8px #fff3;
+  border: 1px solid #fff6;
+}
+
+/* --- TITRES --- */
+h1, h2, h3 {
+  font-weight: 800;
+  letter-spacing: -.5px;
+  text-align: center;
+  margin-top: 0.2em;
+}
+
+/* --- Carrousel (Page principale) --- */
+.carousel {
+  position: relative;
+  margin: 2.5em auto 3em auto;
+  width: 88vw;
+  max-width: 760px;
+  background: #18181aee;
+  border-radius: 20px;
+  box-shadow: 0 2px 12px #2226;
+  padding: 1.2em 1.2em 1.8em 1.2em;
+  min-height: 196px;
+  overflow: hidden;
+}
+.carousel h2 {
+  margin: 0 0 1.2em 0;
+  text-align: center;
+  font-size: 1.4em;
+  font-weight: bold;
+  letter-spacing: .01em;
+}
+.carousel-track {
+  display: flex;
+  gap: 1.5em;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  padding-bottom: 8px;
+}
+.carousel-item {
+  background: #222232;
+  border-radius: 12px;
+  min-width: 175px;
+  min-height: 100px;
+  box-shadow: 0 2px 6px #0003;
+  padding: 1.1em 1.8em;
+  font-size: 1em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #eef;
+}
+/* Boutons du carrousel */
+.carousel-prev,
+.carousel-next {
+  position: absolute;
+  top: 48%;
+  transform: translateY(-50%);
+  background: #232329b0;
+  color: #fff;
+  border: none;
+  border-radius: 50%;
+  width: 38px;
+  height: 38px;
+  font-size: 1.8em;
+  cursor: pointer;
+  box-shadow: 0 2px 8px #1a1b2a44;
+  z-index: 2;
+  user-select: none;
+  outline: none;
+  transition: background .15s, color .15s, box-shadow .15s;
+}
+.carousel-prev:hover,
+.carousel-next:hover {
+  background: #fff;
+  color: #232329;
+  box-shadow: 0 2px 10px #fff3;
+}
+.carousel-prev { left: 6px; }
+.carousel-next { right: 6px; }
+
+/* --- Page Contact façon Linktree --- */
 .linktree-main {
   min-height: 100vh;
   display: flex;
@@ -59,8 +158,6 @@ html, body {
   gap: 1.2em;
   width: 100%;
 }
-
-/* Boutons type Linktree */
 .link-btn {
   display: flex;
   align-items: center;
@@ -94,29 +191,34 @@ html, body {
   margin: 0;
 }
 
-/* Petites tailles d'écrans */
-@media (max-width: 430px) {
+/* --- Responsive --- */
+@media (max-width: 650px) {
+  .carousel {
+    margin: 1.2em auto 1.5em auto;
+    padding: 0.5em 0.3em 1em 0.3em;
+    min-height: 106px;
+  }
+  .carousel-item {
+    min-width: 120px;
+    padding: 0.7em 0.7em;
+    font-size: 0.92em;
+  }
+  .carousel-prev,
+  .carousel-next {
+    width: 29px;
+    height: 29px;
+    font-size: 1.24em;
+  }
+  .contact-btn-top {
+    top: 16px; right: 12px; font-size: 1em; padding: 0.55em 1em;
+  }
   .link-btn {
     width: 98vw;
     padding-left: 0.7em;
     padding-right: 0.7em;
     font-size: 1em;
   }
-  .contact-btn-top {
-    top: 16px; right: 12px; font-size: 1em; padding: 0.55em 1em;
-  }
 }
 
-h1, h2, h3 { 
-  font-weight: 800; 
-  letter-spacing: -.5px; 
-  text-align:center;
-}
-
-a {
-  color: inherit;
-  text-decoration: none;
-}
-a:visited {
-  color: inherit;
-}
+a { color: inherit; text-decoration: none; }
+a:visited { color: inherit; }
