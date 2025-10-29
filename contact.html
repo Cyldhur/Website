@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Contact – Portfolio</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    body { background: #000; color: #fff; min-height: 100vh; margin:0; display: flex; flex-direction: column; }
+    .contact-links {
+      max-width: 450px; margin: 60px auto 0 auto; display: flex; flex-direction: column; gap: 2.5em; align-items: stretch;
+      background: rgba(30,30,36,0.82); border-radius: 22px; box-shadow: 0 2px 26px #111a; padding: 30px 28px 36px 28px;
+      position: relative; z-index: 2;
+    }
+    .contact-links h1 { font-size: 1.7em; text-align: center; color: #fff; margin: 0 0 1.7em 0; }
+    .contact-link {
+      display: flex; align-items: center; justify-content: flex-start;
+      gap: 1.15em; font-size: 1.19em;
+      padding: 1em 1em 1em 1.5em;
+      background: #1d1d21;
+      color: #fff;
+      border-radius: 16px;
+      border: 1.5px solid #232329;
+      text-decoration: none;
+      font-weight: 500;
+      letter-spacing: .01em;
+      box-shadow: 0 1px 8px #0003;
+      transition: background .16s, color .16s, box-shadow .18s;
+      cursor: pointer;
+      position: relative;
+      z-index: 1;
+    }
+    .contact-link:hover, .contact-link:focus {
+      background: #fff; color: #222; box-shadow: 0 0 17px #fff4;
+    }
+
+    .contact-link .icon {
+      width: 34px;
+      height: 34px;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 999px;
+      overflow: hidden;
+      background: #18191e;
+      border: 1.5px solid #232329;
+      margin-right: 7px;
+    }
+    .contact-link .icon svg {
+      width: 22px; height: 22px; display: block;
+    }
+    .contact-link.discord .icon {
+      background: #5865F2;
+      border: 1.5px solid #232329;
+    }
+    .contact-link.x .icon {
+      background: #fff;
+    }
+    .contact-link.x:hover .icon,
+    .contact-link.x:focus .icon {
+      background: #232329 !important;
+    }
+    .contact-link.x:hover .icon svg path,
+    .contact-link.x:focus .icon svg path {
+      fill: #fff !important;
+    }
+    .contact-link.discord:hover .icon,
+    .contact-link.discord:focus .icon {
+      background: #fff !important;
+    }
+    .contact-link.discord:hover .icon svg path:not(:first-child),
+    .contact-link.discord:focus .icon svg path:not(:first-child) {
+      fill: #5865F2 !important;
+    }
+
+    .discord-id-copied-msg {
+      position: absolute; right: 20px; top: 50%; transform: translateY(-50%);
+      font-size: 0.97em; color: #5EEDB0; font-weight: 700;
+      background: #151615; border-radius: 6px; padding: 2px 7px;
+      opacity: 0; transition: opacity .18s;
+      pointer-events: none;
+    }
+    .contact-link.copied .discord-id-copied-msg { opacity: 1; }
+
+    @media (max-width: 600px) {
+      .contact-links { max-width: 99vw; padding: 7vw 3vw 8vw 3vw;}
+      .contact-link { font-size: 1em; padding: 0.9em 1vw 0.9em 1em;}
+      .contact-links h1 { font-size: 1.2em; }
+    }
+  </style>
+</head>
+<body>
+  <canvas id="starfield"></canvas>
+  <a class="contact-btn-top" href="index.html">Accueil</a>
+  <div class="contact-links">
+    <h1>Me retrouver&nbsp;:</h1>
+    <a class="contact-link x" target="_blank"
+       href="https://twitter.com/TonPseudo">
+      <span class="icon">
+        <!-- X logo officiel noir sur blanc -->
+        <svg viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect width="120" height="120" fill="none"/>
+          <path fill="#000" d="M90.6 24.0H74.1l-14.1 19.1L46.0 24.0H29.5l23 31.4L24 96.0h16.8L59.7 70.4l14.8 25.6H91.3L67.8 63.4l22.8-31.1zm-19.8 60.8l-8.0-13.2-8.1 13.2H70.8zm2.9-5.9l-9.3-16.2L35.1 24.0h9.7l16.2 27.7 16.2-27.7h9.7l-29.3 55.9z"/>
+        </svg>
+      </span>
+      <span>Twitter / X</span>
+      <span style="margin-left:auto;font-size:.95em;color:#fff;">&#8599;</span>
+    </a>
+
+    <span class="contact-link discord" id="discord-link" tabindex="0">
+      <span class="icon">
+        <!-- Discord logo SVG -->
+        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path fill="#fff" d="M21.72 0H2.28A2.29 2.29 0 0 0 0 2.29v19.42A2.29 2.29 0 0 0 2.28 24h17.69l-.83-2.89 1.99-2.16V2.29A2.29 2.29 0 0 0 21.72 0Z"/>
+          <path fill="#5865F2" d="M21.72 0H2.28A2.29 2.29 0 0 0 0 2.29v19.42A2.29 2.29 0 0 0 2.28 24h17.69l-.83-2.89 1.99-2.16V2.29A2.29 2.29 0 0 0 21.72 0Z"/>
+          <path fill="#fff" d="M16.31 17.14s-.32-.38-.58-.72c1.13-.32 1.56-1.04 1.56-1.04-.36.26-.69.44-.99.57a7.42 7.42 0 0 1-3.49.47c-.26-.03-.53-.06-.81-.11l-.02-.01c-.18-.04-.38-.09-.58-.15-.15-.05-.31-.11-.47-.19-.07-.03-.13-.05-.2-.08l-.06-.03c-.01 0-.02 0-.03-.01-1.36-.5-2.11-1.26-2.11-1.26s.42.72 1.55 1.04c-.27.34-.59.72-.59.72-1.94-.06-2.68-1.34-2.68-1.34 0-2.84 1.27-5.15 1.27-5.15 1.27-.95 2.47-.93 2.47-.93l.09.11c-1.58.44-2.31 1.14-2.31 1.14s.19-.1.52-.24c.95-.43 1.71-.55 2.03-.58.06-.01.11-.02.17-.02.58-.08 1.23-.1 1.94.01.9.13 1.86.44 2.94 1.09 0 0-.7-.67-2.21-1.12l.13-.14s1.2-.02 2.47.93c0 0 1.27 2.31 1.27 5.15 0 0-.74 1.28-2.68 1.34Zm-5.05-4.13c-.38 0-.68.34-.68.75 0 .41.3.75.68.75s.69-.33.68-.75c.01-.41-.3-.75-.68-.75Zm4.22 0c-.38 0-.68.34-.68.75 0 .41.3.75.68.75.38 0 .68-.33.68-.75 0-.41-.3-.75-.68-.75Z"/>
+        </svg>
+      </span>
+      <span>Discord&nbsp;:&nbsp;<b id="discord-username">TonPseudo#0000</b></span>
+      <span class="discord-id-copied-msg" id="copied-msg">Pseudo copié !</span>
+    </span>
+  </div>
+  <script src="starfield.js"></script>
+  <script>
+    // Copier le pseudo Discord au clic ou Enter/espace
+    const discordUser = "TonPseudo#0000"; // <-- MODIFIE ICI
+    const link = document.getElementById('discord-link');
+    const msg = document.getElementById("copied-msg");
+
+    function copyDiscord(e) {
+      navigator.clipboard.writeText(discordUser)
+        .then(() => {
+          link.classList.add('copied');
+          msg.textContent = "Pseudo copié !";
+          setTimeout(() => { link.classList.remove('copied'); }, 1400);
+        }, () => {
+          link.classList.add('copied');
+          msg.textContent = "Erreur 😢";
+          setTimeout(() => { link.classList.remove('copied'); }, 1400);
+        });
+    }
+    link.addEventListener('click', copyDiscord);
+    link.addEventListener('keypress', function(e){
+      if(e.key=='Enter' || e.key==" ") copyDiscord(e);
+    });
+  </script>
+</body>
+</html>
