@@ -1,232 +1,24 @@
-body {
+/* Style global */
+html, body {
+  height: 100%;
   margin: 0;
-  color: #fff;
+  padding: 0;
   background: #000;
-  font-family: system-ui, sans-serif;
+  color: #fff;
+  font-family: 'Segoe UI', 'Arial', sans-serif;
 }
 
+/* Overlay starfield full background */
 #starfield {
   position: fixed;
-  left: 0; top: 0;
+  top: 0; left: 0;
   width: 100vw; height: 100vh;
   z-index: -1;
   display: block;
   background: #000;
 }
 
-header, footer {
-  text-align: center;
-  padding: 1.5rem;
-  background: rgba(0,0,0,0.7);
-}
-footer {
-  margin-top: 2rem;
-}
-main {
-  margin-bottom: 3rem;
-}
-h2 {
-  text-align: center;
-  margin: 2rem 0 1rem 0;
-  font-weight: bold;
-  letter-spacing: .06em;
-}
-.carousel {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 1rem;
-  margin-bottom: 2rem;
-  width: 100%;
-  overflow: visible !important;
-}
-section > .carousel {
-  max-width: 1200px;
-  margin-left: auto;
-  margin-right: auto;
-}
-.carousel-btn {
-  background: #232329;
-  border: none;
-  color: #fff;
-  font-size: 2em;
-  padding: 0 .5em;
-  border-radius: 50%;
-  cursor: pointer;
-  z-index: 1;
-  transition: background .15s, color .15s;
-  align-self: center;
-}
-.carousel-btn:hover { background: #fff; color:#222; }
-.carousel-track {
-  position: relative;
-  overflow-x: auto;
-  overflow-y: visible !important;
-  display: flex;
-  gap: 1.2rem;
-  scroll-behavior: smooth;
-  scrollbar-width: none;
-  -ms-overflow-style: none;
-  padding-bottom: 10px;
-  overflow: visible !important;
-}
-.carousel-track::-webkit-scrollbar { display: none; }
-.carousel-item {
-  flex: 0 0 auto;
-  background: rgba(25,25,30,0.78);
-  border-radius: 8px;
-  padding: 0 0 10px 0;
-  box-shadow: 0 2px 8px #0213;
-  width: 180px;
-  text-align: center;
-  transition: transform .23s cubic-bezier(.4,1.7,.6,.8), box-shadow .22s, z-index .21s;
-  cursor: pointer;
-  overflow: visible;
-  z-index: 1;
-}
-.carousel-item h3 {
-  background: #232329;
-  color: #fff;
-  margin: 0.5rem 0 0 0;
-  font-size: 1em;
-  padding: .4em 0;
-  border-radius: 6px;
-  width: 80%;
-  margin-left: auto; margin-right: auto;
-  box-shadow: 0px 1px 5px #0007;
-  letter-spacing: .02em;
-}
-.carousel-item a { text-decoration: none; }
-.carousel-item a:hover h3 { color: #ededed; background: #232329; }
-.carousel-item:hover,
-.carousel-item:focus-within {
-  box-shadow:
-    0 2px 8px 3px rgba(255,255,255,0.16),
-    0 0 16px 4px rgba(255,255,255,0.09);
-  transform: scale(1.065);
-  z-index: 3;
-}
-.carousel-item:hover h3,
-.carousel-item:focus-within h3 {
-  color: #ededed;
-  background: #232329;
-}
-.carousel-item:hover .carousel-video,
-.carousel-item:focus-within .carousel-video {
-  filter: brightness(1.08) saturate(1.08);
-  transition: filter .3s;
-}
-
-/* -------- Embeds vidéo --------- */
-.carousel-video {
-  width: 100%;
-  background: #111;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 7px 7px 0 0;
-  overflow: visible;
-  position: relative;
-}
-.carousel-horizontal .carousel-video { aspect-ratio: 16 / 9; min-height: 115px; }
-.carousel-vertical   .carousel-video { aspect-ratio: 9 / 16; min-height: 320px; }
-.carousel-video iframe {
-  width: 100%;
-  height: 100%;
-  min-height: 100%;
-  border-radius: 7px 7px 0 0;
-  background: #111;
-  border: none;
-}
-.carousel-horizontal .carousel-item { width: 270px; }
-.carousel-horizontal .carousel-video { min-height: 150px; }
-@media (max-width: 800px) {
-  .carousel-track { gap: 8px; }
-  .carousel-item, .carousel-horizontal .carousel-item { width: 52vw; }
-  .carousel-video, .carousel-horizontal .carousel-video, .carousel-vertical .carousel-video { min-height: 38vw; }
-}
-a { color: #fff; transition: color .22s; }
-a:hover { color: #ededed; }
-
-/* Overlay invisible qui capture le click partout sur la video carrousel */
-.zoom-trigger {
-  position: absolute;
-  top: 0; left: 0; right: 0; bottom: 0;
-  width: 100%; height: 100%;
-  z-index: 5;
-  cursor: pointer;
-  background: transparent;
-}
-.carousel-item:active .zoom-trigger,
-.carousel-item:focus .zoom-trigger {
-  outline: none;
-}
-
-/* --------- MODALE ZOOM VIDEO --------- */
-.zoom-modal {
-  position: fixed; z-index: 2000;
-  left:0; top:0; bottom:0; right:0;
-  width:100vw; height:100vh;
-  display: none;
-  justify-content: center;
-  align-items: center;
-}
-.zoom-modal-overlay {
-  position:fixed; top:0; left:0; right:0; bottom:0;
-  width:100vw; height:100vh;
-  background:rgba(0,0,0,0.87);
-  cursor:pointer;
-}
-.zoom-modal-content {
-  position: relative;
-  background: #1b1b22;
-  border-radius: 16px;
-  box-shadow: 0 0 48px #23232999;
-  padding: 18px 8px 14px 8px;
-  max-width: 96vw;
-  max-height: 92vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  z-index:2;
-}
-.zoom-modal-close {
-  position:absolute; top:9px; right:17px;
-  background: none; border: none;
-  color: #fff; font-size:2rem; cursor:pointer;
-  z-index:3;
-  transition: color .2s;
-}
-.zoom-modal-close:hover { color: #ededed;}
-.zoom-modal-video {
-  width: 76vw;
-  max-width: 850px;
-  aspect-ratio: 16/9;
-  background: #000;
-  border-radius: 12px;
-  box-shadow: 0 0 12px #222b;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.zoom-modal-video iframe {
-  width: 100%; height: 100%;
-  border-radius:12px;
-  background: #000;
-  border: none;
-}
-.zoom-modal-title {
-  margin-top: 1.5rem;
-  font-size: 1.1em;
-  color: #fff;
-  text-align: center;
-}
-@media (max-width: 700px) {
-  .zoom-modal-video { width:98vw; }
-  .zoom-modal-content { max-width: 100vw; padding: 3px 1px 7px 1px; }
-}
-
-/* Bouton Contact en haut à droite */
+/* Bouton Accueil en haut à droite */
 .contact-btn-top {
   position: fixed;
   top: 30px;
@@ -252,59 +44,79 @@ a:hover { color: #ededed; }
   border: 1px solid #fff6;
 }
 
-/* Bouton Contact en bas (footer) */
-.contact-btn-bottom {
-  display: inline-block;
-  margin: 0.5em 0;
-  padding: 0.5em 1.3em;
+/* Centrage façon Linktree */
+.linktree-main {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.linktree-links {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.2em;
+  width: 100%;
+}
+
+/* Boutons type Linktree */
+.link-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.8em;
+  padding: 0.7em 2.2em;
+  font-size: 1.18em;
   background: #232329cc;
   color: #fff;
-  border-radius: 20px;
   font-weight: 600;
-  border: 1px solid #fff2;
+  border-radius: 24px;
+  border: 1.2px solid #fff2;
   box-shadow: 0 1px 6px #0002;
   text-decoration: none;
   transition: background .18s, color .18s, box-shadow .18s;
-  font-size: 1.07em;
+  width: 340px;
+  max-width: 94vw;
 }
-.contact-btn-bottom:hover {
+.link-btn:hover {
   background: #fff;
   color: #232329;
   box-shadow: 0 2px 8px #fff3;
-  border: 1px solid #fff6;
+  border: 1.2px solid #fff6;
 }
-@media (max-width: 650px) {
+.link-btn-logo {
+  height: 28px;
+  width: 28px;
+  object-fit: contain;
+  border-radius: 7px;
+  background: transparent;
+  margin: 0;
+}
+
+/* Petites tailles d'écrans */
+@media (max-width: 430px) {
+  .link-btn {
+    width: 98vw;
+    padding-left: 0.7em;
+    padding-right: 0.7em;
+    font-size: 1em;
+  }
   .contact-btn-top {
     top: 16px; right: 12px; font-size: 1em; padding: 0.55em 1em;
   }
 }
 
-.logo-btn {
-    display: flex;
-    align-items: center;
-    text-decoration: none;
-    color: #fff;
-    margin: 0.5em 0;
-    font-weight: 600;
-    padding: 0.5em 1em;
-    background: #232329cc;
-    border-radius: 20px;
-    border: 1px solid #fff2;
-    box-shadow: 0 1px 6px #0002;
-    transition: background .18s, color .18s, box-shadow .18s;
-    font-size: 1.07em;
+h1, h2, h3 { 
+  font-weight: 800; 
+  letter-spacing: -.5px; 
+  text-align:center;
 }
-.logo-btn:hover {
-    background: #fff;
-    color: #232329;
-    box-shadow: 0 2px 8px #fff3;
-    border: 1px solid #fff6;
+
+a {
+  color: inherit;
+  text-decoration: none;
 }
-.logo-img {
-    width: 28px;
-    height: 28px;
-    object-fit: contain;
-    margin-right: 10px;
-    border-radius: 6px;
-    background: #18181a;
+a:visited {
+  color: inherit;
 }
