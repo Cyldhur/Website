@@ -1,36 +1,38 @@
-body {
-  margin: 0;
-  color: #fff;
-  background: #000;
-  font-family: system-ui, sans-serif;
+body {  
+  margin: 0;  
+  color: #fff;  
+  background: #000;  
+  font-family: system-ui, sans-serif;  
+}  
+  
+#starfield {  
+  position: fixed;  
+  left: 0; top: 0;  
+  width: 100vw; height: 100vh;  
+  z-index: -1;  
+  display: block;  
+  background: #000;  
+}  
+  
+header, footer {  
+  text-align: center;  
+  padding: 1.5rem;  
+  background: rgba(0,0,0,0.7);  
+}  
+footer {  
+  margin-top: 2rem;  
+}  
+main {  
+  margin-bottom: 3rem;  
+}  
+h2 {  
+  text-align: center;  
+  margin: 2rem 0 1rem 0;  
+  font-weight: bold;  
+  letter-spacing: .06em;  
 }
 
-#starfield {
-  position: fixed;
-  left: 0; top: 0;
-  width: 100vw; height: 100vh;
-  z-index: -1;
-  display: block;
-  background: #000;
-}
-
-header, footer {
-  text-align: center;
-  padding: 1.5rem;
-  background: rgba(0,0,0,0.7);
-}
-footer {
-  margin-top: 2rem;
-}
-main {
-  margin-bottom: 3rem;
-}
-h2 {
-  text-align: center;
-  margin: 2rem 0 1rem 0;
-  font-weight: bold;
-  letter-spacing: .06em;
-}
+/* ----------- CAROUSEL (3 VIDEOS CENTREES) -------------- */
 .carousel {
   display: flex;
   align-items: center;
@@ -53,66 +55,82 @@ section > .carousel {
   padding: 0 .5em;
   border-radius: 50%;
   cursor: pointer;
-  z-index: 1;
+  z-index: 10;
   transition: background .15s, color .15s;
   align-self: center;
+  position: relative;
 }
 .carousel-btn:hover { background: #fff; color:#222; }
+
+/* Carrousel 3 vidéos centrées avec animation fluide */
 .carousel-track {
   position: relative;
-  overflow-x: auto;
-  overflow-y: visible !important;
-  display: flex;
-  gap: 1.2rem;
-  scroll-behavior: smooth;
-  scrollbar-width: none;
-  -ms-overflow-style: none;
-  padding-bottom: 10px;
-  overflow: visible !important;
+  width: 870px;      /* 3 x 270px + marge. Modifie selon .carousel-item */
+  min-height: 320px;
+  height: 100%;
+  margin: 0 auto;
+  display: block;
 }
-.carousel-track::-webkit-scrollbar { display: none; }
 .carousel-item {
-  flex: 0 0 auto;
+  width: 270px;     /* Ajuste avec la JS si tu changes ici */
+  position: absolute;
+  left: 50%;
+  top: 0;
+  transform: translateX(-50%) scale(0.85);
+  opacity: 0;
+  z-index: 0;
+  pointer-events: none;
+  transition: all 0.5s cubic-bezier(.33,1.44,.81,1);
   background: rgba(25,25,30,0.78);
   border-radius: 8px;
   padding: 0 0 10px 0;
   box-shadow: 0 2px 8px #0213;
-  width: 180px;
   text-align: center;
-  transition: transform .23s cubic-bezier(.4,1.7,.6,.8), box-shadow .22s, z-index .21s;
-  cursor: pointer;
   overflow: visible;
-  z-index: 1;
 }
-.carousel-item h3 {
-  background: #232329;
-  color: #fff;
-  margin: 0.5rem 0 0 0;
-  font-size: 1em;
-  padding: .4em 0;
-  border-radius: 6px;
-  width: 80%;
-  margin-left: auto; margin-right: auto;
-  box-shadow: 0px 1px 5px #0007;
-  letter-spacing: .02em;
+.carousel-item.active {
+  transform: translateX(-50%) scale(1.12);
+  opacity: 1;
+  z-index: 3;
+  pointer-events: auto;
+}
+.carousel-item.prev {
+  transform: translateX(calc(-50% - 290px)) scale(1);
+  opacity: 1;
+  z-index: 2;
+  pointer-events: auto;
+}
+.carousel-item.next {
+  transform: translateX(calc(-50% + 290px)) scale(1);
+  opacity: 1;
+  z-index: 2;
+  pointer-events: auto;
+}
+.carousel-item h3 {  
+  background: #232329;  
+  color: #fff;  
+  margin: 0.5rem 0 0 0;  
+  font-size: 1em;  
+  padding: .4em 0;  
+  border-radius: 6px;  
+  width: 80%;  
+  margin-left: auto; margin-right: auto;  
+  box-shadow: 0px 1px 5px #0007;  
+  letter-spacing: .02em;  
 }
 .carousel-item a { text-decoration: none; }
 .carousel-item a:hover h3 { color: #ededed; background: #232329; }
-.carousel-item:hover,
-.carousel-item:focus-within {
+.carousel-item:hover, .carousel-item:focus-within {
   box-shadow:
     0 2px 8px 3px rgba(255,255,255,0.16),
     0 0 16px 4px rgba(255,255,255,0.09);
   transform: scale(1.065);
-  z-index: 3;
+  z-index: 4;
 }
-.carousel-item:hover h3,
-.carousel-item:focus-within h3 {
-  color: #ededed;
-  background: #232329;
+.carousel-item:hover h3, .carousel-item:focus-within h3 {
+  color: #ededed; background: #232329;
 }
-.carousel-item:hover .carousel-video,
-.carousel-item:focus-within .carousel-video {
+.carousel-item:hover .carousel-video, .carousel-item:focus-within .carousel-video {
   filter: brightness(1.08) saturate(1.08);
   transition: filter .3s;
 }
@@ -141,8 +159,17 @@ section > .carousel {
 .carousel-horizontal .carousel-item { width: 270px; }
 .carousel-horizontal .carousel-video { min-height: 150px; }
 @media (max-width: 800px) {
-  .carousel-track { gap: 8px; }
-  .carousel-item, .carousel-horizontal .carousel-item { width: 52vw; }
+  .carousel-track { width: 100vw; min-height: unset; height: auto; }
+  .carousel-item, .carousel-horizontal .carousel-item {
+    width: 90vw !important;
+    position: static !important;
+    left: 0 !important;
+    top: 0 !important;
+    transform: none !important;
+    opacity: 1 !important;
+    z-index: 1 !important;
+    pointer-events: auto !important;
+  }
   .carousel-video, .carousel-horizontal .carousel-video, .carousel-vertical .carousel-video { min-height: 38vw; }
 }
 a { color: #fff; transition: color .22s; }
@@ -157,8 +184,7 @@ a:hover { color: #ededed; }
   cursor: pointer;
   background: transparent;
 }
-.carousel-item:active .zoom-trigger,
-.carousel-item:focus .zoom-trigger {
+.carousel-item:active .zoom-trigger, .carousel-item:focus .zoom-trigger {
   outline: none;
 }
 
@@ -279,49 +305,7 @@ a:hover { color: #ededed; }
   }
 }
 
-.contact-btn-bottom {
-  display: inline-block;
-  margin: 0.5em 0;
-  padding: 0.5em 1.3em;
-  background: #232329cc;
-  color: #fff;
-  border-radius: 20px;
-  font-weight: 600;
-  border: 1px solid #fff2;
-  box-shadow: 0 1px 6px #0002;
-  text-decoration: none;
-  transition: background .18s, color .18s, box-shadow .18s;
-  font-size: 1.07em;
-}
-.contact-btn-bottom:hover {
-  background: #fff;
-  color: #232329;
-  box-shadow: 0 2px 8px #fff3;
-  border: 1px solid #fff6;
-}
-/* Bouton Contact en haut à droite et custom boutons */
-.contact-btn-top {
-  background: #232329cc;
-  color: #fff;
-  border-radius: 20px;
-  font-weight: 600;
-  letter-spacing: .03em;
-  border: 1px solid #fff2;
-  box-shadow: 0 2px 12px #0003;
-  transition: background .18s, color .18s, box-shadow .18s;
-  text-decoration: none;
-  font-size: 1.07em;
-  cursor: pointer;
-  padding: 0.65em 1.5em;
-}
-
-.contact-btn-top:hover {
-  background: #fff;
-  color: #232329;
-  box-shadow: 0 4px 22px #fff4;
-  border: 1px solid #fff6;
-}
-
+/* Logos réseaux sociaux */
 .contact-logo {
   height: 24px;
   width: 24px;
@@ -329,9 +313,4 @@ a:hover { color: #ededed; }
   margin-right: 8px;
   border-radius: 8px;
   object-fit: contain;
-}
-@media (max-width: 650px) {
-  .contact-btn-top {
-    font-size: 1em; padding: 0.55em 1em;
-  }
 }
