@@ -1,213 +1,119 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cyldhur | Portfolio</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <title>Portfolio</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <!-- Canvas étoiles en arrière-plan -->
-    <canvas id="starfield"></canvas>
-
-    <!-- Navigation -->
-    <nav>
-        <div>
-            <a href="index.html">Accueil</a>
-            <a href="contact.html">Contact</a>
-        </div>
-    </nav>
-
-    <!-- Section principale -->
+  <!-- Starfield -->
+  <canvas id="starfield"></canvas>
+  <!-- Bouton Contact flottant -->
+  <a class="contact-btn-top" href="/contact">Contact</a>
+  <header>
+    <h1>Cyldhur | Syl</h1>
+    <p>Monteur vidéo</p>
+  </header>
+  <main>
+    <!-- Carrousel vertical (Formats Courts) -->
     <section>
-        <div class="text-center">
-            <h1>Cyldhur | Syl</h1>
-            <p>Monteur vidéo</p>
-        </div>
-
-        <!-- Carrousel Formats Courts -->
-        <h2 class="mt-2">Formats Courts</h2>
-        <div class="carousel carousel-horizontal">
-            <button class="carousel-btn prev">‹</button>
-            
-            <div class="carousel-track">
-                <div class="carousel-item">
-                    <div class="carousel-video">
-                        <iframe 
-                            src="https://www.youtube.com/embed/dQw4w9WgXcQ" 
-                            allowfullscreen
-                            allow="autoplay; fullscreen; picture-in-picture">
-                        </iframe>
-                        <button class="zoom-trigger">🔍</button>
-                    </div>
-                    <h3>Short Example 1</h3>
-                </div>
-
-                <div class="carousel-item">
-                    <div class="carousel-video">
-                        <iframe 
-                            src="https://www.youtube.com/embed/dQw4w9WgXcQ" 
-                            allowfullscreen
-                            allow="autoplay; fullscreen; picture-in-picture">
-                        </iframe>
-                        <button class="zoom-trigger">🔍</button>
-                    </div>
-                    <h3>Short Example 2</h3>
-                </div>
-
-                <div class="carousel-item">
-                    <div class="carousel-video">
-                        <iframe 
-                            src="https://www.youtube.com/embed/dQw4w9WgXcQ" 
-                            allowfullscreen
-                            allow="autoplay; fullscreen; picture-in-picture">
-                        </iframe>
-                        <button class="zoom-trigger">🔍</button>
-                    </div>
-                    <h3>Short Example 3</h3>
-                </div>
-
-                <div class="carousel-item">
-                    <div class="carousel-video">
-                        <iframe 
-                            src="https://www.youtube.com/embed/dQw4w9WgXcQ" 
-                            allowfullscreen
-                            allow="autoplay; fullscreen; picture-in-picture">
-                        </iframe>
-                        <button class="zoom-trigger">🔍</button>
-                    </div>
-                    <h3>Short Example 4</h3>
-                </div>
-
-                <div class="carousel-item">
-                    <div class="carousel-video">
-                        <iframe 
-                            src="https://www.youtube.com/embed/dQw4w9WgXcQ" 
-                            allowfullscreen
-                            allow="autoplay; fullscreen; picture-in-picture">
-                        </iframe>
-                        <button class="zoom-trigger">🔍</button>
-                    </div>
-                    <h3>Short Example 5</h3>
-                </div>
-
-                <div class="carousel-item">
-                    <div class="carousel-video">
-                        <iframe 
-                            src="https://www.youtube.com/embed/dQw4w9WgXcQ" 
-                            allowfullscreen
-                            allow="autoplay; fullscreen; picture-in-picture">
-                        </iframe>
-                        <button class="zoom-trigger">🔍</button>
-                    </div>
-                    <h3>Short Example 6</h3>
-                </div>
-
-                <div class="carousel-item">
-                    <div class="carousel-video">
-                        <iframe 
-                            src="https://www.youtube.com/embed/dQw4w9WgXcQ" 
-                            allowfullscreen
-                            allow="autoplay; fullscreen; picture-in-picture">
-                        </iframe>
-                        <button class="zoom-trigger">🔍</button>
-                    </div>
-                    <h3>Short Example 7</h3>
-                </div>
+      <h2>Formats Courts</h2>
+      <div class="carousel carousel-vertical">
+        <button class="carousel-btn prev" aria-label="Précédent">‹</button>
+        <div class="carousel-track">
+          <div class="carousel-item">
+            <div class="carousel-video">
+              <iframe src="https://www.youtube.com/embed/APCLapD3yIo" title="Short Example 1" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
+              <div class="zoom-trigger" title="Agrandir la vidéo"></div>
             </div>
-
-            <button class="carousel-btn next">›</button>
-        </div>
-
-        <!-- Carrousel Formats Best of -->
-        <h2 class="mt-2">Formats Best of</h2>
-        <div class="carousel carousel-horizontal">
-            <button class="carousel-btn prev">‹</button>
-            
-            <div class="carousel-track">
-                <div class="carousel-item">
-                    <div class="carousel-video">
-                        <iframe 
-                            src="https://www.youtube.com/embed/dQw4w9WgXcQ" 
-                            allowfullscreen
-                            allow="autoplay; fullscreen; picture-in-picture">
-                        </iframe>
-                        <button class="zoom-trigger">🔍</button>
-                    </div>
-                    <h3>Best Of Example 1</h3>
-                </div>
-
-                <div class="carousel-item">
-                    <div class="carousel-video">
-                        <iframe 
-                            src="https://www.youtube.com/embed/dQw4w9WgXcQ" 
-                            allowfullscreen
-                            allow="autoplay; fullscreen; picture-in-picture">
-                        </iframe>
-                        <button class="zoom-trigger">🔍</button>
-                    </div>
-                    <h3>Best Of Example 2</h3>
-                </div>
-
-                <div class="carousel-item">
-                    <div class="carousel-video">
-                        <iframe 
-                            src="https://www.youtube.com/embed/dQw4w9WgXcQ" 
-                            allowfullscreen
-                            allow="autoplay; fullscreen; picture-in-picture">
-                        </iframe>
-                        <button class="zoom-trigger">🔍</button>
-                    </div>
-                    <h3>Best Of Example 3</h3>
-                </div>
-
-                <div class="carousel-item">
-                    <div class="carousel-video">
-                        <iframe 
-                            src="https://www.youtube.com/embed/dQw4w9WgXcQ" 
-                            allowfullscreen
-                            allow="autoplay; fullscreen; picture-in-picture">
-                        </iframe>
-                        <button class="zoom-trigger">🔍</button>
-                    </div>
-                    <h3>Best Of Example 4</h3>
-                </div>
-
-                <div class="carousel-item">
-                    <div class="carousel-video">
-                        <iframe 
-                            src="https://www.youtube.com/embed/dQw4w9WgXcQ" 
-                            allowfullscreen
-                            allow="autoplay; fullscreen; picture-in-picture">
-                        </iframe>
-                        <button class="zoom-trigger">🔍</button>
-                    </div>
-                    <h3>Best Of Example 5</h3>
-                </div>
+            <h3>Short Example 1</h3>
+          </div>
+          <div class="carousel-item">
+            <div class="carousel-video">
+              <iframe src="https://www.youtube.com/embed/guhiICNMrtA" title="Short Example 2" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
+              <div class="zoom-trigger" title="Agrandir la vidéo"></div>
             </div>
-
-            <button class="carousel-btn next">›</button>
+            <h3>Short Example 2</h3>
+          </div>
+          <div class="carousel-item">
+            <div class="carousel-video">
+              <iframe src="https://www.youtube.com/embed/HJQHvL5H0bo" title="Short Example 3" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
+              <div class="zoom-trigger" title="Agrandir la vidéo"></div>
+            </div>
+            <h3>Short Example 3</h3>
+          </div>
+          <div class="carousel-item">
+            <div class="carousel-video">
+              <iframe src="https://www.youtube.com/embed/5rH4uEkYIf4" title="Short Example 4" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
+              <div class="zoom-trigger" title="Agrandir la vidéo"></div>
+            </div>
+            <h3>Short Example 4</h3>
+          </div>
+          <div class="carousel-item">
+            <div class="carousel-video">
+              <iframe src="https://www.youtube.com/embed/KvklJqXL9rE" title="Short Example 5" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
+              <div class="zoom-trigger" title="Agrandir la vidéo"></div>
+            </div>
+            <h3>Short Example 5</h3>
+          </div>
+          <div class="carousel-item">
+            <div class="carousel-video">
+              <iframe src="https://www.youtube.com/embed/XD9LJXT_5r8" title="Short Example 6" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
+              <div class="zoom-trigger" title="Agrandir la vidéo"></div>
+            </div>
+            <h3>Short Example 6</h3>
+          </div>
+          <div class="carousel-item">
+            <div class="carousel-video">
+              <iframe src="https://www.youtube.com/embed/pseAX_QSFkE" title="Short Example 7" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
+              <div class="zoom-trigger" title="Agrandir la vidéo"></div>
+            </div>
+            <h3>Short Example 7</h3>
+          </div>
         </div>
-
-        <!-- Section Contact -->
-        <div class="text-center mt-2">
-            <h2>Contact</h2>
-            <p><a href="contact.html" style="color: #4a9eff; text-decoration: none;">Contactez-moi ici</a></p>
-        </div>
+        <button class="carousel-btn next" aria-label="Suivant">›</button>
+      </div>
     </section>
-
-    <!-- Modale Zoom Vidéo -->
-    <div id="zoom-modal">
-        <div class="zoom-modal-overlay"></div>
-        <div class="zoom-modal-content">
-            <button class="zoom-close zoom-modal-close">✕</button>
-            <div class="zoom-modal-video"></div>
-            <h3 class="zoom-modal-title"></h3>
+    <!-- Carrousel horizontal (Best Of) -->
+    <section>
+      <h2>Formats Best of</h2>
+      <div class="carousel carousel-horizontal">
+        <button class="carousel-btn prev" aria-label="Précédent">‹</button>
+        <div class="carousel-track">
+          <div class="carousel-item">
+            <div class="carousel-video">
+              <iframe src="https://www.youtube.com/embed/SQXtqlGgZNU" title="Best Of Example 1" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
+              <div class="zoom-trigger" title="Agrandir la vidéo"></div>
+            </div>
+            <h3>Best Of Example 1</h3>
+          </div>
+          <div class="carousel-item">
+            <div class="carousel-video">
+              <iframe src="https://www.youtube.com/embed/fdghsTWGZzM" title="Best Of Example 2" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
+              <div class="zoom-trigger" title="Agrandir la vidéo"></div>
+            </div>
+            <h3>Best Of Example 2</h3>
+          </div>
         </div>
+        <button class="carousel-btn next" aria-label="Suivant">›</button>
+      </div>
+    </section>
+  </main>
+  <footer>
+    <a class="contact-btn-bottom" href="/contact">Contact</a>
+  </footer>
+  <!-- Modale Zoom vidéo -->
+  <div id="zoom-modal" class="zoom-modal" style="display:none;">
+    <div class="zoom-modal-overlay"></div>
+    <div class="zoom-modal-content">
+      <button class="zoom-modal-close" aria-label="Fermer la vidéo">✕</button>
+      <div class="zoom-modal-video"></div>
+      <div class="zoom-modal-title"></div>
     </div>
-
-    <!-- Scripts -->
-    <script src="starfield.js"></script>
-    <script src="carousel.js"></script>
+  </div>
+  <!-- Scripts -->
+  <script src="starfield.js"></script>
+  <script src="carousel.js"></script>
 </body>
 </html>
