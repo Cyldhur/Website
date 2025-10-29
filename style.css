@@ -118,6 +118,15 @@ section > .carousel {
   overflow: visible;
 }
 
+/* CORRECTION pour les vidéos verticales (Shorts) */
+.carousel-vertical .carousel-item {
+  width: 180px; /* Réduit la largeur */
+}
+
+.carousel-vertical .carousel-track {
+  min-height: 400px; /* Hauteur ajustée pour les vidéos verticales */
+}
+
 /* 3 vidéos principales au centre - même taille */
 .carousel-item.prev-center,
 .carousel-item.active,
@@ -191,14 +200,21 @@ section > .carousel {
   position: relative;
 }
 
+/* Vidéos HORIZONTALES (Best Of) */
 .carousel-horizontal .carousel-video {
   aspect-ratio: 16 / 9;
   min-height: 150px;
 }
 
+.carousel-horizontal .carousel-item {
+  width: 270px;
+}
+
+/* Vidéos VERTICALES (Shorts) - CORRECTION */
 .carousel-vertical .carousel-video {
   aspect-ratio: 9 / 16;
-  min-height: 320px;
+  max-height: 360px; /* Limite la hauteur pour éviter qu'elles soient coupées */
+  min-height: 280px;
 }
 
 .carousel-video iframe {
@@ -208,10 +224,6 @@ section > .carousel {
   border-radius: 7px 7px 0 0;
   background: #111;
   border: none;
-}
-
-.carousel-horizontal .carousel-item {
-  width: 270px;
 }
 
 /* Titre des vidéos */
@@ -328,7 +340,8 @@ section > .carousel {
   }
 
   .carousel-item,
-  .carousel-horizontal .carousel-item {
+  .carousel-horizontal .carousel-item,
+  .carousel-vertical .carousel-item {
     width: 90vw !important;
     position: static !important;
     left: 0 !important;
@@ -365,12 +378,16 @@ section > .carousel {
 }
 
 @media (max-width: 768px) {
-  .carousel-item {
+  .carousel-horizontal .carousel-item {
     width: 220px;
   }
 
   .carousel-horizontal .carousel-video {
     min-height: 115px;
+  }
+  
+  .carousel-vertical .carousel-video {
+    max-height: 300px;
   }
 }
 
@@ -422,4 +439,13 @@ section > .carousel {
 
 .mb-2 {
   margin-bottom: 2rem;
+}
+
+a {
+  color: #fff;
+  transition: color 0.22s;
+}
+
+a:hover {
+  color: #ededed;
 }
