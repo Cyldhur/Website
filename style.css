@@ -278,3 +278,33 @@ a:hover { color: #ededed; }
     top: 16px; right: 12px; font-size: 1em; padding: 0.55em 1em;
   }
 }
+
+.logo-btn {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: #fff;
+    margin: 0.5em 0;
+    font-weight: 600;
+    padding: 0.5em 1em;
+    background: #232329cc;
+    border-radius: 20px;
+    border: 1px solid #fff2;
+    box-shadow: 0 1px 6px #0002;
+    transition: background .18s, color .18s, box-shadow .18s;
+    font-size: 1.07em;
+}
+.logo-btn:hover {
+    background: #fff;
+    color: #232329;
+    box-shadow: 0 2px 8px #fff3;
+    border: 1px solid #fff6;
+}
+.logo-img {
+    width: 28px;
+    height: 28px;
+    object-fit: contain;
+    margin-right: 10px;
+    border-radius: 6px;
+    background: #18181a;
+}
