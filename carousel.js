@@ -1,101 +1,106 @@
-// Carrousel 3 vidéos au premier plan + animation fluide
+// Carrousel 5 vidéos visibles avec fade sur les côtés
 document.querySelectorAll('.carousel').forEach(carousel => {
   const track = carousel.querySelector('.carousel-track');
   const items = Array.from(track.querySelectorAll('.carousel-item'));
-  const prevBtn = carousel.querySelector('.carousel-prev');
-  const nextBtn = carousel.querySelector('.carousel-next');
+  const prevBtn = carousel.querySelector('.carousel-btn.prev');
+  const nextBtn = carousel.querySelector('.carousel-btn.next');
+  
   if (items.length === 0) return;
 
-  // Largeur item détectée dynamiquement (fixée pour uniformité)
-  const itemWidth = 270; // aligné avec le CSS
-
-  let current = 1; // Commencer avec le 2e élément au centre
+  let current = 2; // Commencer au 3e élément (index 2)
 
   function updateCarousel() {
     items.forEach((item, i) => {
-      item.classList.remove('prev', 'active', 'next');
-      item.style.transition = 'all .5s cubic-bezier(.33,1.44,.81,1)';
+      // Retirer toutes les classes
+      item.classList.remove('far-left', 'prev-center', 'active', 'next-center', 'far-right');
+      item.style.transition = 'all 0.5s cubic-bezier(.33,1.44,.81,1)';
       item.style.position = 'absolute';
       item.style.left = '50%';
       item.style.top = '0';
-
-      // Reset styles "fade"
       item.style.opacity = '0';
       item.style.zIndex = '0';
       item.style.pointerEvents = 'none';
-      item.style.filter = 'none';
-      
-      if (i === current) {
-        item.classList.add('active');
-        item.style.transform = 'scale(1.12) translateX(-50%)';
-        item.style.opacity = '1';
-        item.style.zIndex = '3';
-        item.style.pointerEvents = 'auto';
-      } else if (i === (current - 1 + items.length) % items.length) {
-        item.classList.add('prev');
-        item.style.transform = 'scale(1) translateX(calc(-50% - 290px))';
-        item.style.opacity = '0.7';
-        item.style.zIndex = '2';
-        item.style.pointerEvents = 'auto';
-        item.style.filter = 'blur(2px)';
-      } else if (i === (current + 1) % items.length) {
-        item.classList.add('next');
-        item.style.transform = 'scale(1) translateX(calc(-50% + 290px))';
-        item.style.opacity = '0.7';
-        item.style.zIndex = '2';
-        item.style.pointerEvents = 'auto';
-        item.style.filter = 'blur(2px)';
-      } else {
-        // Les autres restent cachées
-        item.style.transform = 'scale(0.85) translateX(-50%)';
-      }
+      item.style.transform = 'translateX(-50%) scale(0.85)';
+    });
+
+    // Calculer les indices avec boucle circulaire
+    const total = items.length;
+    const farLeft = (current - 2 + total) % total;
+    const prevCenter = (current - 1 + total) % total;
+    const active = current % total;
+    const nextCenter = (current + 1) % total;
+    const farRight = (current + 2) % total;
+
+    // Appliquer les classes et styles
+    if (items[farLeft]) {
+      items[farLeft].classList.add('far-left');
+      items[farLeft].style.transform = 'translateX(calc(-50% - 600px)) scale(0.9)';
+      items[farLeft].style.opacity = '0.4';
+      items[farLeft].style.zIndex = '1';
+    }
+    
+    if (items[prevCenter]) {
+      items[prevCenter].classList.add('prev-center');
+      items[prevCenter].style.transform = 'translateX(calc(-50% - 300px)) scale(1)';
+      items[prevCenter].style.opacity = '1';
+      items[prevCenter].style.zIndex = '3';
+      items[prevCenter].style.pointerEvents = 'auto';
+    }
+    
+    if (items[active]) {
+      items[active].classList.add('active');
+      items[active].style.transform = 'translateX(-50%) scale(1)';
+      items[active].style.opacity = '1';
+      items[active].style.zIndex = '3';
+      items[active].style.pointerEvents = 'auto';
+    }
+    
+    if (items[nextCenter]) {
+      items[nextCenter].classList.add('next-center');
+      items[nextCenter].style.transform = 'translateX(calc(-50% + 300px)) scale(1)';
+      items[nextCenter].style.opacity = '1';
+      items[nextCenter].style.zIndex = '3';
+      items[nextCenter].style.pointerEvents = 'auto';
+    }
+    
+    if (items[farRight]) {
+      items[farRight].classList.add('far-right');
+      items[farRight].style.transform = 'translateX(calc(-50% + 600px)) scale(0.9)';
+      items[farRight].style.opacity = '0.4';
+      items[farRight].style.zIndex = '1';
+    }
+  }
+
+  // Gestion des boutons
+  if (prevBtn) {
+    prevBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      current = (current - 1 + items.length) % items.length;
+      updateCarousel();
     });
   }
 
-  function showPrev() {
-    current = (current - 1 + items.length) % items.length;
-    updateCarousel();
+  if (nextBtn) {
+    nextBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      current = (current + 1) % items.length;
+      updateCarousel();
+    });
   }
 
-  function showNext() {
-    current = (current + 1) % items.length;
-    updateCarousel();
-  }
-
-  // Ajoute les écouteurs d'événements aux flèches
-  if (prevBtn) prevBtn.onclick = showPrev;
-  if (nextBtn) nextBtn.onclick = showNext;
+  // Navigation au clavier (optionnel)
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowLeft') {
+      current = (current - 1 + items.length) % items.length;
+      updateCarousel();
+    } else if (e.key === 'ArrowRight') {
+      current = (current + 1) % items.length;
+      updateCarousel();
+    }
+  });
 
   updateCarousel();
 });
 
-// ---- Zoom modale vidéo ----
-document.querySelectorAll('.zoom-trigger').forEach(trigger => {
-  trigger.onclick = function(e) {
-    const item = trigger.closest('.carousel-item');
-    let iframe = item.querySelector('.carousel-video iframe');
-    let title = item.querySelector('h3') ? item.querySelector('h3').textContent : '';
-    if (!iframe) return;
-    let url = new URL(iframe.src, window.location.origin);
-    url.searchParams.set('autoplay', '1');
-    let zoomModal = document.getElementById('zoom-modal');
-    let container = zoomModal.querySelector('.zoom-modal-video');
-    let titleEl = zoomModal.querySelector('.zoom-modal-title');
-    container.innerHTML = '';
-    let newIframe = document.createElement('iframe');
-    newIframe.src = url.toString();
-    newIframe.setAttribute('allowfullscreen','');
-    newIframe.setAttribute('allow','autoplay; fullscreen; picture-in-picture');
-    newIframe.allow = "autoplay; fullscreen; picture-in-picture";
-    newIframe.width = '100%';
-    newIframe.height = '100%';
-    container.appendChild(newIframe);
-    if (titleEl) titleEl.textContent = title;
-    zoomModal.classList.add('open');
-    document.body.style.overflow='hidden';
-  }
-});
-document.getElementById('zoom-modal').querySelector('.zoom-modal-close').onclick = function() {
-  document.getElementById('zoom-modal').classList.remove('open');
-  document.body.style.overflow='';
-};
+// Restaurer le scroll du body
+document.body.style.overflow = '';
