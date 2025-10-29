@@ -278,3 +278,60 @@ a:hover { color: #ededed; }
     top: 16px; right: 12px; font-size: 1em; padding: 0.55em 1em;
   }
 }
+
+.contact-btn-bottom {
+  display: inline-block;
+  margin: 0.5em 0;
+  padding: 0.5em 1.3em;
+  background: #232329cc;
+  color: #fff;
+  border-radius: 20px;
+  font-weight: 600;
+  border: 1px solid #fff2;
+  box-shadow: 0 1px 6px #0002;
+  text-decoration: none;
+  transition: background .18s, color .18s, box-shadow .18s;
+  font-size: 1.07em;
+}
+.contact-btn-bottom:hover {
+  background: #fff;
+  color: #232329;
+  box-shadow: 0 2px 8px #fff3;
+  border: 1px solid #fff6;
+}
+/* Bouton Contact en haut à droite et custom boutons */
+.contact-btn-top {
+  background: #232329cc;
+  color: #fff;
+  border-radius: 20px;
+  font-weight: 600;
+  letter-spacing: .03em;
+  border: 1px solid #fff2;
+  box-shadow: 0 2px 12px #0003;
+  transition: background .18s, color .18s, box-shadow .18s;
+  text-decoration: none;
+  font-size: 1.07em;
+  cursor: pointer;
+  padding: 0.65em 1.5em;
+}
+
+.contact-btn-top:hover {
+  background: #fff;
+  color: #232329;
+  box-shadow: 0 4px 22px #fff4;
+  border: 1px solid #fff6;
+}
+
+.contact-logo {
+  height: 24px;
+  width: 24px;
+  vertical-align: middle;
+  margin-right: 8px;
+  border-radius: 8px;
+  object-fit: contain;
+}
+@media (max-width: 650px) {
+  .contact-btn-top {
+    font-size: 1em; padding: 0.55em 1em;
+  }
+}
