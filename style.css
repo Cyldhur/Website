@@ -65,14 +65,14 @@ section > .carousel {
 /* Carrousel 3 vidéos centrées avec animation fluide */
 .carousel-track {
   position: relative;
-  width: 870px;      /* 3 x 270px + marge. Modifie selon .carousel-item */
+  width: 570px;      /* 3 x 270px + marge. Modifie selon .carousel-item */
   min-height: 320px;
   height: 100%;
   margin: 0 auto;
   display: block;
 }
 .carousel-item {
-  width: 270px;     /* Ajuste avec la JS si tu changes ici */
+  width: 170px;     /* Ajuste avec la JS si tu changes ici */
   position: absolute;
   left: 50%;
   top: 0;
