@@ -65,14 +65,15 @@ section > .carousel {
 /* Carrousel 3 vidéos centrées avec animation fluide */
 .carousel-track {
   position: relative;
-  width: 570px;      /* 3 x 270px + marge. Modifie selon .carousel-item */
-  min-height: 320px;
+  width: 870px;   /* 3x270px + marges entre */
+  min-height: 330px;
   height: 100%;
   margin: 0 auto;
   display: block;
 }
 .carousel-item {
-  width: 170px;     /* Ajuste avec la JS si tu changes ici */
+  width: 270px;     /* Assure la même largeur pour tous les items */
+  height: 320px;    /* Fixe aussi la hauteur pour uniformité */
   position: absolute;
   left: 50%;
   top: 0;
@@ -93,51 +94,39 @@ section > .carousel {
   opacity: 1;
   z-index: 3;
   pointer-events: auto;
+  filter: none;
+}
+.carousel-item.prev,
+.carousel-item.next {
+  opacity: 0.7;
+  z-index: 2;
+  pointer-events: auto;
+  filter: blur(2px);
 }
 .carousel-item.prev {
   transform: translateX(calc(-50% - 290px)) scale(1);
-  opacity: 1;
-  z-index: 2;
-  pointer-events: auto;
 }
 .carousel-item.next {
   transform: translateX(calc(-50% + 290px)) scale(1);
-  opacity: 1;
-  z-index: 2;
-  pointer-events: auto;
 }
-.carousel-item h3 {  
-  background: #232329;  
-  color: #fff;  
-  margin: 0.5rem 0 0 0;  
-  font-size: 1em;  
-  padding: .4em 0;  
-  border-radius: 6px;  
-  width: 80%;  
-  margin-left: auto; margin-right: auto;  
-  box-shadow: 0px 1px 5px #0007;  
-  letter-spacing: .02em;  
+
+/* Overlay invisible qui capture le click partout sur la video carrousel */
+.zoom-trigger {
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  width: 100%; height: 100%;
+  z-index: 5;
+  cursor: pointer;
+  background: transparent;
 }
-.carousel-item a { text-decoration: none; }
-.carousel-item a:hover h3 { color: #ededed; background: #232329; }
-.carousel-item:hover, .carousel-item:focus-within {
-  box-shadow:
-    0 2px 8px 3px rgba(255,255,255,0.16),
-    0 0 16px 4px rgba(255,255,255,0.09);
-  transform: scale(1.065);
-  z-index: 4;
-}
-.carousel-item:hover h3, .carousel-item:focus-within h3 {
-  color: #ededed; background: #232329;
-}
-.carousel-item:hover .carousel-video, .carousel-item:focus-within .carousel-video {
-  filter: brightness(1.08) saturate(1.08);
-  transition: filter .3s;
+.carousel-item:active .zoom-trigger, .carousel-item:focus .zoom-trigger {
+  outline: none;
 }
 
 /* -------- Embeds vidéo --------- */
 .carousel-video {
-  width: 100%;
+  width: 100% !important;       /* Assure largeur max */
+  height: 175px !important;     /* Garde tous les embeds à la même hauteur */
   background: #111;
   display: flex;
   align-items: center;
@@ -146,31 +135,32 @@ section > .carousel {
   overflow: visible;
   position: relative;
 }
-.carousel-horizontal .carousel-video { aspect-ratio: 16 / 9; min-height: 115px; }
-.carousel-vertical   .carousel-video { aspect-ratio: 9 / 16; min-height: 320px; }
 .carousel-video iframe {
-  width: 100%;
-  height: 100%;
-  min-height: 100%;
+  width: 100% !important;
+  height: 100% !important;
+  min-height: unset !important;
   border-radius: 7px 7px 0 0;
   background: #111;
   border: none;
 }
+
 .carousel-horizontal .carousel-item { width: 270px; }
 .carousel-horizontal .carousel-video { min-height: 150px; }
-@media (max-width: 800px) {
+@media (max-width: 900px) {
   .carousel-track { width: 100vw; min-height: unset; height: auto; }
   .carousel-item, .carousel-horizontal .carousel-item {
     width: 90vw !important;
+    height: 60vw !important;
     position: static !important;
     left: 0 !important;
     top: 0 !important;
     transform: none !important;
     opacity: 1 !important;
-    z-index: 1 !important;
-    pointer-events: auto !important;
+    filter: none !important;
   }
-  .carousel-video, .carousel-horizontal .carousel-video, .carousel-vertical .carousel-video { min-height: 38vw; }
+  .carousel-video, .carousel-video iframe {
+    height: 40vw !important;
+  }
 }
 a { color: #fff; transition: color .22s; }
 a:hover { color: #ededed; }
