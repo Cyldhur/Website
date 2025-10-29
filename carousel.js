@@ -2,10 +2,12 @@
 document.querySelectorAll('.carousel').forEach(carousel => {
   const track = carousel.querySelector('.carousel-track');
   const items = Array.from(track.querySelectorAll('.carousel-item'));
+  const prevBtn = carousel.querySelector('.carousel-prev');
+  const nextBtn = carousel.querySelector('.carousel-next');
   if (items.length === 0) return;
 
-  // Largeur item détectée dynamiquement
-  const itemWidth = items[0].offsetWidth || 270;
+  // Largeur item détectée dynamiquement (fixée pour uniformité)
+  const itemWidth = 270; // aligné avec le CSS
 
   let current = 1; // Commencer avec le 2e élément au centre
 
@@ -16,45 +18,55 @@ document.querySelectorAll('.carousel').forEach(carousel => {
       item.style.position = 'absolute';
       item.style.left = '50%';
       item.style.top = '0';
-      item.style.transform = 'scale(0.85) translateX(-50%)';
+
+      // Reset styles "fade"
       item.style.opacity = '0';
       item.style.zIndex = '0';
       item.style.pointerEvents = 'none';
-
-      if (i === (current - 1 + items.length) % items.length) {
-        item.classList.add('prev');
-        item.style.transform = `translateX(calc(-50% - ${itemWidth + 18}px)) scale(1)`; // 18px = marge approx
-        item.style.opacity = '1';
-        item.style.zIndex = '1';
-        item.style.pointerEvents = 'auto';
-      } else if (i === current) {
+      item.style.filter = 'none';
+      
+      if (i === current) {
         item.classList.add('active');
-        item.style.transform = 'translateX(-50%) scale(1.12)';
+        item.style.transform = 'scale(1.12) translateX(-50%)';
         item.style.opacity = '1';
+        item.style.zIndex = '3';
+        item.style.pointerEvents = 'auto';
+      } else if (i === (current - 1 + items.length) % items.length) {
+        item.classList.add('prev');
+        item.style.transform = 'scale(1) translateX(calc(-50% - 290px))';
+        item.style.opacity = '0.7';
         item.style.zIndex = '2';
         item.style.pointerEvents = 'auto';
+        item.style.filter = 'blur(2px)';
       } else if (i === (current + 1) % items.length) {
         item.classList.add('next');
-        item.style.transform = `translateX(calc(-50% + ${itemWidth + 18}px)) scale(1)`;
-        item.style.opacity = '1';
-        item.style.zIndex = '1';
+        item.style.transform = 'scale(1) translateX(calc(-50% + 290px))';
+        item.style.opacity = '0.7';
+        item.style.zIndex = '2';
         item.style.pointerEvents = 'auto';
+        item.style.filter = 'blur(2px)';
+      } else {
+        // Les autres restent cachées
+        item.style.transform = 'scale(0.85) translateX(-50%)';
       }
     });
   }
-  updateCarousel();
 
-  carousel.querySelector('.prev').onclick = () => {
+  function showPrev() {
     current = (current - 1 + items.length) % items.length;
     updateCarousel();
-  };
-  carousel.querySelector('.next').onclick = () => {
+  }
+
+  function showNext() {
     current = (current + 1) % items.length;
     updateCarousel();
-  };
+  }
 
-  // Responsive : recalcule au redimensionnement
-  window.addEventListener("resize", () => setTimeout(updateCarousel, 150));
+  // Ajoute les écouteurs d'événements aux flèches
+  if (prevBtn) prevBtn.onclick = showPrev;
+  if (nextBtn) nextBtn.onclick = showNext;
+
+  updateCarousel();
 });
 
 // ---- Zoom modale vidéo ----
@@ -77,29 +89,13 @@ document.querySelectorAll('.zoom-trigger').forEach(trigger => {
     newIframe.allow = "autoplay; fullscreen; picture-in-picture";
     newIframe.width = '100%';
     newIframe.height = '100%';
-    newIframe.style.borderRadius = '12px';
     container.appendChild(newIframe);
-    titleEl.textContent = title;
-    zoomModal.style.display = 'flex';
+    if (titleEl) titleEl.textContent = title;
+    zoomModal.classList.add('open');
     document.body.style.overflow='hidden';
-    e.preventDefault();
-    e.stopPropagation();
-    return false;
   }
 });
-document.querySelectorAll('.zoom-modal-close, .zoom-modal-overlay').forEach(el => {
-  el.onclick = function() {
-    let zoomModal = document.getElementById('zoom-modal');
-    zoomModal.style.display = 'none';
-    zoomModal.querySelector('.zoom-modal-video').innerHTML = '';
-    document.body.style.overflow='';
-  }
-});
-document.addEventListener('keydown', function(e) {
-  if (e.key === "Escape") {
-    let zoomModal = document.getElementById('zoom-modal');
-    zoomModal.style.display = 'none';
-    zoomModal.querySelector('.zoom-modal-video').innerHTML = '';
-    document.body.style.overflow='';
-  }
-});
+document.getElementById('zoom-modal').querySelector('.zoom-modal-close').onclick = function() {
+  document.getElementById('zoom-modal').classList.remove('open');
+  document.body.style.overflow='';
+};
