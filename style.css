@@ -369,13 +369,13 @@ section > .carousel {
   background: rgba(255,255,255,0.2);
 }
 
-.btn-contact-nav, .btn-contact-bottom {
+.btn-contact {
   display: inline-block;
   background: rgba(90,90,90,0.35);
   color: #fff;
   border: 1px solid rgba(255,255,255,0.12);
-  border-radius: 7px;
-  padding: 0.60em 1.5em;
+  border-radius: 999px; /* très arrondi */
+  padding: 0.6em 2em;
   font-size: 1rem;
   text-decoration: none;
   transition: background 0.2s, color 0.2s, border-color 0.2s, box-shadow 0.3s;
@@ -383,8 +383,8 @@ section > .carousel {
   box-shadow: 0 1px 8px 0 rgba(0,0,0,0.10);
   cursor: pointer;
 }
-.btn-contact-nav:hover, .btn-contact-nav:focus,
-.btn-contact-bottom:hover, .btn-contact-bottom:focus {
+.btn-contact:hover,
+.btn-contact:focus {
   background: rgba(160,160,160,0.33);
   color: #fff;
   border-color: #fff;
