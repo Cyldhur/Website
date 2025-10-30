@@ -37,7 +37,9 @@ nav a {
   margin: 0 1rem;
   transition: color 0.3s;
 }
-nav a:hover { color: #4a9eff; }
+nav a:hover {
+  color: #4a9eff;
+}
 
 /***** SECTION & TITRES *****/
 section {
@@ -45,7 +47,9 @@ section {
   max-width: 1400px;
   margin: 0 auto;
 }
-h1, h2, h3 { margin-bottom: 1rem; }
+h1, h2, h3 {
+  margin-bottom: 1rem;
+}
 
 /***** CARROUSEL & ITEMS *****/
 .carousel {
@@ -72,7 +76,7 @@ section > .carousel {
   height: 100%;
   margin: 0 auto;
   display: block;
-  overflow: visible; /* <-- Ne surtout pas "hidden" pour le halo */
+  overflow: visible; /* Important pour le halo */
 }
 
 .carousel-item {
@@ -135,12 +139,15 @@ section > .carousel {
   transform: translateY(-50%);
   backdrop-filter: blur(4px);
 }
-.carousel-btn:hover { background: #fff; color: #222; transform: translateY(-50%) scale(1.1);}
+.carousel-btn:hover {
+  background: #fff;
+  color: #222;
+  transform: translateY(-50%) scale(1.1);
+}
 .carousel-btn.prev { left: 20px; }
 .carousel-btn.next { right: 20px; }
 
 /***** PRÉVIEW BLOC VIDÉO + TITRE + HALO *****/
-
 .carousel-preview {
   border-radius: 12px;
   background: transparent;
@@ -151,18 +158,18 @@ section > .carousel {
   overflow: visible;
 }
 
-/* HALO BLANC AU HOVER - MAXI VISIBLE */
-.carousel-item:hover .carousel-preview,
-.carousel-item:focus-within .carousel-preview {
+/* HALO BLANC VISIBLE SUR HOVER / FOCUS-WITHIN */
+.carousel-preview:hover,
+.carousel-preview:focus-within {
   transform: scale(1.07);
   box-shadow:
-    0 0 48px 16px rgba(255,255,255,0.95),
-    0 0 0 12px rgba(255,255,255,0.33),
-    0 0 0 2px #fff;
+    0 0 80px 28px rgba(255,255,255,0.92),   /* large halo diffus blanc */
+    0 0 0 12px rgba(255,255,255,0.25),      /* contour */
+    0 0 16px 2px #fff;                      /* éclat central */
   z-index: 11;
 }
 
-/* Video container */
+/***** VIDEO CONTAINER *****/
 .carousel-video {
   width: 100%;
   background: #111;
@@ -179,8 +186,6 @@ section > .carousel {
   border: none !important;
   z-index: 1;
 }
-
-/* FORME ET RATIO */
 .carousel-horizontal .carousel-video {
   aspect-ratio: 16/9;
   min-height: 150px;
@@ -191,7 +196,6 @@ section > .carousel {
   max-height: 360px;
   min-height: 280px;
 }
-
 .carousel-video iframe {
   display: block;
   width: 100% !important;
@@ -204,7 +208,9 @@ section > .carousel {
 }
 
 /* SUPPRESSION ENCADREMENT BLANC */
-.carousel-preview, .carousel-video, .carousel-video iframe {
+.carousel-preview,
+.carousel-video,
+.carousel-video iframe {
   border: none !important;
   box-shadow: none !important;
   background-clip: padding-box;
@@ -212,7 +218,7 @@ section > .carousel {
 
 /***** ZONE TITRE *****/
 .carousel-preview h3 {
-  background: rgba(50,50,50,0.56); /* joli fond gris transparent sous le titre */
+  background: rgba(50,50,50,0.56);
   margin: 0;
   padding: 10px 0 8px 0;
   font-size: 0.95rem;
@@ -225,9 +231,7 @@ section > .carousel {
   z-index: 2;
 }
 
-/* AUCUN CHANGEMENT DE STYLE SUR LE h3 AU HOVER ! */
-
-/* (SUPPRESSION badge short) */
+/***** SUPPRESSION BADGE SHORT *****/
 .badge-short { display: none !important; }
 
 /* OVERLAY ZOOM */
@@ -280,7 +284,7 @@ section > .carousel {
   border-radius: 8px;
   overflow: hidden;
 }
-.zoom-modal-video iframe { width: 100%; height: 100%; border: none;}
+.zoom-modal-video iframe { width: 100%; height: 100%; border: none; }
 .zoom-modal-title {
   margin-top: 1rem;
   font-size: 1.2rem;
@@ -305,7 +309,6 @@ section > .carousel {
   transition: transform 0.2s;
 }
 .zoom-close:hover { transform: scale(1.1); }
-
 
 /***** RESPONSIVE *****/
 @media (max-width: 800px) {
@@ -340,13 +343,32 @@ section > .carousel {
 }
 
 /***** CONTACT *****/
-.contact-container { max-width: 800px; margin: 2rem auto; padding: 2rem; background: rgba(25,25,30,0.8); border-radius: 10px; }
-.social-links { display: flex; flex-direction: column; gap: 1rem; margin-top: 2rem; }
-.social-link {
-  display: flex; align-items: center; padding: 1rem;
-  background: rgba(255,255,255,0.1); border-radius: 8px; text-decoration: none; color: #fff; transition: background 0.3s;
+.contact-container {
+  max-width: 800px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background: rgba(25,25,30,0.8);
+  border-radius: 10px;
 }
-.social-link:hover { background: rgba(255,255,255,0.2); }
+.social-links {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+.social-link {
+  display: flex;
+  align-items: center;
+  padding: 1rem;
+  background: rgba(255,255,255,0.1);
+  border-radius: 8px;
+  text-decoration: none;
+  color: #fff;
+  transition: background 0.3s;
+}
+.social-link:hover {
+  background: rgba(255,255,255,0.2);
+}
 
 /***** UTILS *****/
 .text-center { text-align: center; }
