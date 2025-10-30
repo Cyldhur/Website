@@ -90,6 +90,7 @@ section > .carousel {
   overflow: hidden;
 }
 
+/* === DIMINUER LES MARGES/DÉCALAGES DES VERTICALES (SHORTS)=== */
 .carousel-item {
   width: 270px;
   position: absolute;
@@ -116,6 +117,7 @@ section > .carousel {
 .carousel-vertical .carousel-track {
   min-height: 400px; /* Hauteur ajustée pour les vidéos verticales */
 }
+
 
 /* 3 vidéos principales au centre - même taille */
 .carousel-item.prev-center,
@@ -186,9 +188,9 @@ section > .carousel {
   border-radius: 7px 7px 0 0;
   overflow: hidden;
   position: relative;
+  cursor: pointer; /* Pour signifier l'interaction */
 }
 
-/* Vidéos HORIZONTALES (Best Of) */
 .carousel-horizontal .carousel-video {
   aspect-ratio: 16 / 9;
   min-height: 150px;
@@ -198,48 +200,61 @@ section > .carousel {
   width: 270px;
 }
 
-/* Vidéos VERTICALES (Shorts) - CORRECTION */
 .carousel-vertical .carousel-video {
   aspect-ratio: 9 / 16;
   max-height: 360px; /* Limite la hauteur pour éviter qu'elles soient coupées */
   min-height: 280px;
 }
 
-.carousel-video iframe {
-  width: 100%;
-  height: 100%;
-  min-height: 100%;
-  border-radius: 7px 7px 0 0;
-  background: #111;
-  border: none;
+/* Zoom overlay (NOUVEAU) */
+.zoom-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.33);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.22s;
+  cursor: pointer;
+  will-change: opacity;
+  z-index: 4;
 }
 
-/* Titre des vidéos */
+.carousel-video:hover .zoom-overlay,
+.carousel-video:focus .zoom-overlay {
+  opacity: 1;
+}
+
+.zoom-overlay::before {
+  content: "Cliquer pour zoomer et lire";
+  color: #fff;
+  font-size: 1.1em;
+  background: rgba(0,0,0,0.55);
+  padding: 0.4em 1em;
+  border-radius: 0.5em;
+  transition: transform 0.3s;
+  transform: scale(1);
+  pointer-events: none;
+  font-weight: bold;
+}
+
+.carousel-video:hover,
+.carousel-video:focus {
+  transform: scale(1.06);
+  transition: transform 0.18s;
+  z-index: 10;
+}
+
+/* retire le vieux bouton loupe */
+.zoom-trigger { display:none !important; }
+
+/* Title */
 .carousel-item h3 {
   padding: 10px;
   font-size: 0.95rem;
   color: #fff;
   margin: 0;
-}
-
-/* Zoom trigger */
-.zoom-trigger {
-  position: absolute;
-  bottom: 10px;
-  right: 10px;
-  background: rgba(0,0,0,0.7);
-  border: 1px solid rgba(255,255,255,0.3);
-  color: #fff;
-  padding: 5px 10px;
-  border-radius: 5px;
-  cursor: pointer;
-  font-size: 0.9rem;
-  transition: background 0.3s;
-  z-index: 5;
-}
-
-.zoom-trigger:hover {
-  background: rgba(255,255,255,0.2);
 }
 
 /*MODALE ZOOM VIDÉO*/
@@ -369,7 +384,7 @@ section > .carousel {
   .carousel-horizontal .carousel-video {
     min-height: 115px;
   }
-  
+
   .carousel-vertical .carousel-video {
     max-height: 300px;
   }
