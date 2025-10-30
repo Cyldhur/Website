@@ -1,9 +1,26 @@
 /***** RESET & BASE *****/
-* { margin: 0; padding: 0; box-sizing: border-box;}
-body { font-family: Arial, sans-serif; background: #000; color: #fff; overflow-x: hidden; }
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body {
+  font-family: Arial, sans-serif;
+  background: #000;
+  color: #fff;
+  overflow-x: hidden;
+}
 
 /***** STARFIELD *****/
-#starfield { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; background: #000; }
+#starfield {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  background: #000;
+}
 
 /***** NAVIGATION *****/
 nav {
@@ -14,12 +31,25 @@ nav {
   background: rgba(0,0,0,0.5);
   backdrop-filter: blur(10px);
 }
-nav a { color: #fff; text-decoration: none; margin: 0 1rem; transition: color 0.3s; }
-nav a:hover { color: #4a9eff; }
+nav a {
+  color: #fff;
+  text-decoration: none;
+  margin: 0 1rem;
+  transition: color 0.3s;
+}
+nav a:hover {
+  color: #4a9eff;
+}
 
 /***** SECTION & TITRES *****/
-section { padding: 2rem; max-width: 1400px; margin: 0 auto;}
-h1, h2, h3 { margin-bottom: 1rem; }
+section {
+  padding: 2rem;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+h1, h2, h3 {
+  margin-bottom: 1rem;
+}
 
 /***** CARROUSEL & ITEMS *****/
 .carousel {
@@ -66,8 +96,13 @@ section > .carousel {
   text-align: center;
   overflow: visible;
 }
-.carousel-vertical .carousel-item { width: 180px; margin: 0 8px;}
-.carousel-vertical .carousel-track { min-height: 400px; }
+.carousel-vertical .carousel-item {
+  width: 180px;
+  margin: 0 8px;
+}
+.carousel-vertical .carousel-track {
+  min-height: 400px;
+}
 
 .carousel-item.prev-center,
 .carousel-item.active,
@@ -77,12 +112,16 @@ section > .carousel {
   pointer-events: auto;
 }
 .carousel-item.far-left {
-  opacity: 0.4; z-index: 1; pointer-events: none;
+  opacity: 0.4;
+  z-index: 1;
+  pointer-events: none;
   mask-image: linear-gradient(to right, transparent 0%, black 50%);
   -webkit-mask-image: linear-gradient(to right, transparent 0%, black 50%);
 }
 .carousel-item.far-right {
-  opacity: 0.4; z-index: 1; pointer-events: none;
+  opacity: 0.4;
+  z-index: 1;
+  pointer-events: none;
   mask-image: linear-gradient(to left, transparent 0%, black 50%);
   -webkit-mask-image: linear-gradient(to left, transparent 0%, black 50%);
 }
@@ -104,16 +143,28 @@ section > .carousel {
   transform: translateY(-50%);
   backdrop-filter: blur(4px);
 }
-.carousel-btn:hover { background: #fff; color: #222; transform: translateY(-50%) scale(1.1);}
+.carousel-btn:hover {
+  background: #fff;
+  color: #222;
+  transform: translateY(-50%) scale(1.1);
+}
 .carousel-btn.prev { left: 20px; }
 .carousel-btn.next { right: 20px; }
 
-/***** PRÉVIEW BLOC VIDÉO + TITRE *****/
+/***** PRÉVIEW BLOC VIDÉO + ZOOM *****/
 .carousel-preview {
   border-radius: 12px;
-  background: transparent;
+  background: rgba(32,32,32,0.96);
+  transition: transform 0.22s cubic-bezier(.18,.95,.73,1.16);
+  will-change: transform;
+  box-shadow: none;
   position: relative;
   overflow: visible;
+}
+.carousel-preview:hover,
+.carousel-preview:focus-within {
+  transform: scale(1.08);
+  z-index: 12;
 }
 
 /***** VIDEO CONTAINER *****/
@@ -127,12 +178,22 @@ section > .carousel {
   overflow: hidden;
   position: relative;
   cursor: pointer;
+  transition: none;
   outline: none;
+  box-shadow: none !important;
+  border: none !important;
   z-index: 1;
 }
-.carousel-horizontal .carousel-video { aspect-ratio: 16/9; min-height: 150px;}
+.carousel-horizontal .carousel-video {
+  aspect-ratio: 16/9;
+  min-height: 150px;
+}
 .carousel-horizontal .carousel-item { width: 270px; }
-.carousel-vertical .carousel-video { aspect-ratio: 9/16; max-height: 360px; min-height: 280px;}
+.carousel-vertical .carousel-video {
+  aspect-ratio: 9/16;
+  max-height: 360px;
+  min-height: 280px;
+}
 .carousel-video iframe {
   display: block;
   width: 100% !important;
@@ -140,6 +201,7 @@ section > .carousel {
   border: none !important;
   margin: 0;
   outline: none;
+  box-shadow: none !important;
   background: #111;
 }
 
@@ -161,6 +223,8 @@ section > .carousel {
   color: #fff;
   border-radius: 0 0 10px 10px;
   text-align: center;
+  transition: none;
+  text-shadow: none;
   user-select: auto;
   z-index: 2;
 }
@@ -168,7 +232,7 @@ section > .carousel {
 /***** SUPPRESSION BADGE SHORT *****/
 .badge-short { display: none !important; }
 
-/* OVERLAY ZOOM (juste l'overlay, pas d'effet halo) */
+/* OVERLAY ZOOM */
 .zoom-overlay {
   position: absolute;
   inset: 0;
