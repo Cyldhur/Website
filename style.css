@@ -149,6 +149,19 @@ section > .carousel {
   box-shadow: none;
   position: relative;
 }
+
+/* HALO BLANC AU HOVER */
+.carousel-item:hover .carousel-preview,
+.carousel-item:focus-within .carousel-preview {
+  transform: scale(1.07);
+  box-shadow:
+      0 0 38px 0 #fff,
+      0 0 8px 4px #fff8,
+      0 0 2px 0 #fff;
+  z-index: 11;
+}
+
+/* Video container */
 .carousel-video {
   width: 100%;
   background: #111;
@@ -159,7 +172,7 @@ section > .carousel {
   overflow: hidden;
   position: relative;
   cursor: pointer;
-  transition: none; /* Pas de box-shadow ni border d'effet direct ici ! */
+  transition: none;
   outline: none;
   box-shadow: none !important;
   border: none !important;
@@ -188,7 +201,7 @@ section > .carousel {
   background: #111;
 }
 
-/* SUPPRESSION ENCADREMENT BLANC pour la vidéo et tout conteneur */
+/* SUPPRESSION ENCADREMENT BLANC */
 .carousel-preview, .carousel-video, .carousel-video iframe {
   border: none !important;
   box-shadow: none !important;
@@ -197,7 +210,7 @@ section > .carousel {
 
 /***** ZONE TITRE *****/
 .carousel-preview h3 {
-  background: transparent;
+  background: rgba(50,50,50,0.54); /* joli fond gris transparent sous le titre */
   margin: 0;
   padding: 10px 0 8px 0;
   font-size: 0.95rem;
@@ -209,16 +222,7 @@ section > .carousel {
   user-select: auto;
 }
 
-.carousel-item:hover .carousel-preview,
-.carousel-item:focus-within .carousel-preview {
-  transform: scale(1.07);
-  box-shadow: 0 0 28px 0 #4a9eff, 0 0 60px 0 #111c, 0 0 2px 0 #4a9eff;
-  z-index: 11;
-}
-
 /* AUCUN CHANGEMENT DE STYLE SUR LE h3 AU HOVER ! */
-
-/* HALO RESTE SEULEMENT AUTOUR DU .carousel-preview */
 
 /* BADGE SHORT */
 .badge-short {
@@ -266,7 +270,7 @@ section > .carousel {
 }
 .zoom-trigger { display:none !important; }
 
-/*MODALE ZOOM VIDÉO*/
+/* MODALE ZOOM VIDÉO */
 #zoom-modal {
   display: none;
   position: fixed;
