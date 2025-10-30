@@ -375,7 +375,7 @@ section > .carousel {
   color: #fff;
   border: 1px solid rgba(255,255,255,0.12);
   border-radius: 999px; /* très arrondi */
-  padding: 0.6em 2em;
+  padding: 0.6em 1.4em;
   font-size: 1rem;
   text-decoration: none;
   transition: background 0.2s, color 0.2s, border-color 0.2s, box-shadow 0.3s;
