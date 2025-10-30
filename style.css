@@ -116,6 +116,7 @@ section > .carousel {
 
 .carousel-vertical .carousel-track {
   min-height: 400px; /* Hauteur ajustée pour les vidéos verticales */
+  margin: 0 8px;
 }
 
 
@@ -210,10 +211,7 @@ section > .carousel {
 .zoom-overlay {
   position: absolute;
   inset: 0;
-  background: rgba(0,0,0,0.33);
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  background: rgba(0,0,0,0.22); /* Légèrement plus léger du coup pour rester subtil */
   opacity: 0;
   transition: opacity 0.22s;
   cursor: pointer;
@@ -221,22 +219,14 @@ section > .carousel {
   z-index: 4;
 }
 
+.zoom-overlay::before {
+  content: "";
+  display: none !important;
+}
+
 .carousel-video:hover .zoom-overlay,
 .carousel-video:focus .zoom-overlay {
   opacity: 1;
-}
-
-.zoom-overlay::before {
-  content: "Cliquer pour zoomer et lire";
-  color: #fff;
-  font-size: 1.1em;
-  background: rgba(0,0,0,0.55);
-  padding: 0.4em 1em;
-  border-radius: 0.5em;
-  transition: transform 0.3s;
-  transform: scale(1);
-  pointer-events: none;
-  font-weight: bold;
 }
 
 .carousel-video:hover,
