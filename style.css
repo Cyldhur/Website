@@ -370,7 +370,10 @@ section > .carousel {
 }
 
 .btn-contact {
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1em;
   background: rgba(90,90,90,0.35);
   color: #fff;
   border: 1px solid rgba(255,255,255,0.12);
