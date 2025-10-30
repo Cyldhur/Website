@@ -72,7 +72,7 @@ section > .carousel {
   height: 100%;
   margin: 0 auto;
   display: block;
-  overflow: hidden;
+  overflow: visible; /* <-- Ne surtout pas "hidden" pour le halo */
 }
 
 .carousel-item {
@@ -148,16 +148,17 @@ section > .carousel {
   will-change: transform, box-shadow;
   box-shadow: none;
   position: relative;
+  overflow: visible;
 }
 
-/* HALO BLANC AU HOVER */
+/* HALO BLANC AU HOVER - MAXI VISIBLE */
 .carousel-item:hover .carousel-preview,
 .carousel-item:focus-within .carousel-preview {
   transform: scale(1.07);
   box-shadow:
-    0 0 0 6px rgba(255,255,255,0.4),
-    0 0 32px 8px rgba(255,255,255,0.23),
-    0 0 2px 0 #fff;
+    0 0 48px 16px rgba(255,255,255,0.95),
+    0 0 0 12px rgba(255,255,255,0.33),
+    0 0 0 2px #fff;
   z-index: 11;
 }
 
@@ -176,6 +177,7 @@ section > .carousel {
   outline: none;
   box-shadow: none !important;
   border: none !important;
+  z-index: 1;
 }
 
 /* FORME ET RATIO */
@@ -220,6 +222,7 @@ section > .carousel {
   transition: none;
   text-shadow: none;
   user-select: auto;
+  z-index: 2;
 }
 
 /* AUCUN CHANGEMENT DE STYLE SUR LE h3 AU HOVER ! */
