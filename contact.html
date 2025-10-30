@@ -8,30 +8,26 @@
 <body>
     <canvas id="starfield"></canvas>
     <nav>
-        <a href="index.html" class="contact-btn-top">Accueil</a>
+        <a href="index.html" class="btn-contact">Accueil</a>
     </nav>
     <main>
         <section style="max-width:500px;margin:80px auto 0;text-align:center;">
-            <h1>Mes réseaux&nbsp;</h1><br>
-
-            <!-- Bouton Twitter/X -->
-            <a href="https://twitter.com/"
-                class="contact-btn-top" style="position:static;display:inline-flex;align-items:center;margin:8px 0;text-decoration:none;">
-                <img src="logos/X_logo.png" alt="Logo X" class="contact-logo">
-                Twitter / X
-            </a>
-            <br><br>
-
-            <!-- Bouton Discord (copie pseudo) -->
-            <button
-                id="discord-btn"
-                class="contact-btn-top"
-                style="position:static;display:inline-flex;align-items:center;margin:8px 0;cursor:pointer;">
-                <img src="logos/discord_logo.png" alt="Logo Discord" class="contact-logo">
-                <span id="discord-pseudo">Cyldhur</span>
-            </button>
-            <div id="copied-message" style="color:#19cf65;font-weight:bold;display:none;margin-top:8px;">
-                Copié !
+            <h1>Mes réseaux</h1>
+            <div style="margin-top:30px">
+                <!-- Bouton Twitter/X -->
+                <a href="https://twitter.com/" target="_blank" class="btn-contact" style="display:flex;align-items:center;justify-content:center;gap:1em;margin:18px auto;">
+                    <img src="logos/X_logo.png" alt="Logo X" class="contact-logo" style="width:26px;height:26px;">
+                    Twitter / X
+                </a>
+                <!-- Bouton Discord (copie pseudo) -->
+                <button id="discord-btn" class="btn-contact" style="display:flex;align-items:center;justify-content:center;gap:1em;margin:18px auto;cursor:pointer;">
+                    <img src="logos/discord_logo.png" alt="Logo Discord" class="contact-logo" style="width:26px;height:26px;">
+                    <span id="discord-pseudo">Cyldhur</span>
+                </button>
+                <div id="copied-message" style="color:#19cf65;font-weight:bold;display:none;margin-top:8px;">
+                    Copié !
+                </div>
+                <!-- Ajoute d'autres liens réseaux ci-dessous si besoin -->
             </div>
         </section>
     </main>
