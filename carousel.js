@@ -10,9 +10,9 @@ document.querySelectorAll('.carousel').forEach(carousel => {
   let current = 2; // Commencer au 3e élément (index 2)
 
   function updateCarousel() {
-    // Proximité/décalage réglé ici :
-    const gap = isVertical ? 180 : 300; // Réduire ce nombre pour resserrer les shorts
-    const fadeGap = isVertical ? 360 : 600;
+    // Légèrement plus d’espace : gap = 200px pour shorts au lieu de 180
+    const gap = isVertical ? 200 : 300; // espace horizontal entre les shorts
+    const fadeGap = isVertical ? 400 : 600; // décale encore un peu plus les côtés
     items.forEach((item, i) => {
       item.classList.remove('far-left', 'prev-center', 'active', 'next-center', 'far-right');
       item.style.transition = 'all 0.5s cubic-bezier(.33,1.44,.81,1)';
@@ -67,7 +67,7 @@ document.querySelectorAll('.carousel').forEach(carousel => {
     }
   }
 
-  // Gestion des boutons
+  // ... (reste inchangé)
   if (prevBtn) {
     prevBtn.addEventListener('click', (e) => {
       e.preventDefault();
@@ -84,7 +84,6 @@ document.querySelectorAll('.carousel').forEach(carousel => {
     });
   }
 
-  // Navigation au clavier (optionnel)
   document.addEventListener('keydown', (e) => {
     if (e.key === 'ArrowLeft') {
       current = (current - 1 + items.length) % items.length;
@@ -98,13 +97,11 @@ document.querySelectorAll('.carousel').forEach(carousel => {
   updateCarousel();
 });
 
-// --- ZOOM MODAL ---
+// --- ZOOM MODAL --- (reste inchangé)
 function openZoomModal(ytid, title, isVertical) {
   const zoomModal = document.getElementById('zoom-modal');
   const zoomVideo = zoomModal.querySelector('.zoom-modal-video');
   const zoomTitle = zoomModal.querySelector('.zoom-modal-title');
-
-  // On adapte le format/ratio en fonction du type
   zoomVideo.innerHTML = `<iframe 
       src="https://www.youtube.com/embed/${ytid}?autoplay=1"
       allowfullscreen
@@ -114,8 +111,6 @@ function openZoomModal(ytid, title, isVertical) {
   zoomModal.classList.add('active');
   document.body.style.overflow = 'hidden';
 }
-
-// Fermer la modale
 function closeZoomModal() {
   const zoomModal = document.getElementById('zoom-modal');
   zoomModal.classList.remove('active');
@@ -131,11 +126,8 @@ document.querySelectorAll('.zoom-modal-close, .zoom-modal-overlay').forEach(btn 
 window.addEventListener('keydown', e => {
   if (e.key === 'Escape') closeZoomModal();
 });
-
-// --- Ecouteur pour ZOOM (sur overlay ou sur toute la vidéo)
 document.querySelectorAll('.zoomable-video').forEach(el => {
   el.addEventListener('click', function (e) {
-    // Empêche le clic sur le lien de l'iframe (pas besoin si allowfullscreen sur YouTube)
     if (e.target.classList.contains('zoom-overlay') || e.target === this) {
       const ytid = this.getAttribute('data-ytid');
       const title = this.getAttribute('data-title') || '';
@@ -143,7 +135,6 @@ document.querySelectorAll('.zoomable-video').forEach(el => {
       openZoomModal(ytid, title, isVertical);
     }
   });
-  // Pour accessibilité : touche entrée sur focus (tab + entrée)
   el.setAttribute('tabindex', 0);
   el.addEventListener('keydown', function(e){
     if (e.key === 'Enter' || e.key === ' ') {
@@ -155,6 +146,4 @@ document.querySelectorAll('.zoomable-video').forEach(el => {
     }
   });
 });
-
-// Restaurer le scroll du body
 document.body.style.overflow = '';
